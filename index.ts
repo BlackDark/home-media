@@ -7,7 +7,14 @@ const RECORDS: Record[] = [
   { name: "*", type: "A", value: WINT_GLOBAL_IP },
   { name: "mail", type: "A", value: WINT_GLOBAL_IP },
   { name: "www", type: "CNAME", value: "linkvt.github.io" },
-  { type: "MX", value: `mail.${BASE_DOMAIN}`, priority: 0 },
+  { id: "mx-1", type: "MX", value: "route1.mx.cloudflare.net", priority: 68 },
+  { id: "mx-2", type: "MX", value: "route2.mx.cloudflare.net", priority: 58 },
+  { id: "mx-3", type: "MX", value: "route3.mx.cloudflare.net", priority: 89 },
+  {
+    id: "spf",
+    type: "TXT",
+    value: "v=spf1 include:_spf.mx.cloudflare.net ~all",
+  },
   {
     id: "google-site-verification",
     type: "TXT",
