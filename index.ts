@@ -13,10 +13,16 @@ const RECORDS: Record[] = [
     type: "TXT",
     value: `google-site-verification=EkDgV6CTuuKRIdXqWzug81h1nUJ0gYpDYOhgwIT0v4c`,
   },
+  { name: "em585", type: "CNAME", value: "u28506693.wl194.sendgrid.net" },
   {
-    id: "spf",
-    type: "TXT",
-    value: `v=spf1 a mx include:spf-all.comtrance.de ~all`,
+    name: "s1._domainkey",
+    type: "CNAME",
+    value: "s1.domainkey.u28506693.wl194.sendgrid.net",
+  },
+  {
+    name: "s2._domainkey",
+    type: "CNAME",
+    value: "s2.domainkey.u28506693.wl194.sendgrid.net",
   },
 ];
 
