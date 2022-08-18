@@ -1,56 +1,103 @@
 import * as cloudflare from "@pulumi/cloudflare";
+import { DnsRecord, PageRule, Site } from "./types";
 
-const BASE_DOMAIN = "linkvt.de";
-const WINT_GLOBAL_IP = "62.108.32.129";
-const RECORDS: Record[] = [
-  { type: "A", value: WINT_GLOBAL_IP },
-  { name: "*", type: "A", value: WINT_GLOBAL_IP },
-  { name: "mail", type: "A", value: WINT_GLOBAL_IP },
-  { name: "www", type: "CNAME", value: "linkvt.github.io" },
-  { id: "mx-1", type: "MX", value: "route1.mx.cloudflare.net", priority: 68 },
-  { id: "mx-2", type: "MX", value: "route2.mx.cloudflare.net", priority: 58 },
-  { id: "mx-3", type: "MX", value: "route3.mx.cloudflare.net", priority: 89 },
+const BASE_DOMAIN_LINKVT = "linkvt.de";
+const CLOUDFLARE_DUMMY_IP = "192.0.2.1";
+
+const sites: Site[] = [
   {
-    id: "spf",
-    type: "TXT",
-    value: "v=spf1 include:_spf.mx.cloudflare.net ~all",
-  },
-  {
-    id: "google-site-verification",
-    type: "TXT",
-    value: `google-site-verification=EkDgV6CTuuKRIdXqWzug81h1nUJ0gYpDYOhgwIT0v4c`,
-  },
-  { name: "em585", type: "CNAME", value: "u28506693.wl194.sendgrid.net" },
-  {
-    name: "s1._domainkey",
-    type: "CNAME",
-    value: "s1.domainkey.u28506693.wl194.sendgrid.net",
-  },
-  {
-    name: "s2._domainkey",
-    type: "CNAME",
-    value: "s2.domainkey.u28506693.wl194.sendgrid.net",
+    baseDomain: BASE_DOMAIN_LINKVT,
+    records: [
+      { type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true },
+      { name: "www", type: "CNAME", value: "linkvt.github.io" },
+      {
+        id: "mx-1",
+        type: "MX",
+        value: "route1.mx.cloudflare.net",
+        priority: 68,
+      },
+      {
+        id: "mx-2",
+        type: "MX",
+        value: "route2.mx.cloudflare.net",
+        priority: 58,
+      },
+      {
+        id: "mx-3",
+        type: "MX",
+        value: "route3.mx.cloudflare.net",
+        priority: 89,
+      },
+      {
+        id: "spf",
+        type: "TXT",
+        value: "v=spf1 include:_spf.mx.cloudflare.net ~all",
+      },
+      {
+        id: "google-site-verification",
+        type: "TXT",
+        value: `google-site-verification=EkDgV6CTuuKRIdXqWzug81h1nUJ0gYpDYOhgwIT0v4c`,
+      },
+      { name: "em585", type: "CNAME", value: "u28506693.wl194.sendgrid.net" },
+      {
+        name: "s1._domainkey",
+        type: "CNAME",
+        value: "s1.domainkey.u28506693.wl194.sendgrid.net",
+      },
+      {
+        name: "s2._domainkey",
+        type: "CNAME",
+        value: "s2.domainkey.u28506693.wl194.sendgrid.net",
+      },
+    ],
+    pageRules: [
+      {
+        name: "redirect-to-www",
+        actions: {
+          forwardingUrl: {
+            statusCode: 301,
+            url: `https://www.${BASE_DOMAIN_LINKVT}/$1`,
+          },
+        },
+        target: `${BASE_DOMAIN_LINKVT}/*`,
+      },
+    ],
   },
 ];
 
-type Record = Omit<cloudflare.RecordArgs, "name" | "zoneId"> & {
-  id?: string;
-  name?: string;
-  type: "A" | "CNAME" | "MX" | "TXT";
-};
+for (const site of sites) {
+  const zone = deployZone(site.baseDomain);
 
-const zone = new cloudflare.Zone(BASE_DOMAIN, {
-  zone: BASE_DOMAIN,
-});
+  deployRecords(site.records ?? [], zone);
+  deployPageRules(site.pageRules ?? [], zone);
+}
 
-for (const record of RECORDS) {
-  const name = record.name?.length ? record.name : "@"; // @ has to be used instead of empty string
-  const id = record.id ?? `${record.type}-${name}`;
-
-  new cloudflare.Record(id, {
-    ...record,
-    name,
-    ttl: 1, // 1 means auto configured by cloudflare
-    zoneId: zone.id,
+function deployZone(domain: string) {
+  return new cloudflare.Zone(domain, {
+    zone: domain,
   });
+}
+
+function deployRecords(records: DnsRecord[], zone: cloudflare.Zone) {
+  for (const record of records) {
+    const name = record.name?.length ? record.name : "@"; // @ has to be used instead of empty string
+    const id = record.id ?? `${record.type}-${name}`;
+
+    new cloudflare.Record(id, {
+      ...record,
+      name,
+      ttl: 1, // 1 means auto configured by cloudflare
+      zoneId: zone.id,
+    });
+  }
+}
+
+function deployPageRules(pageRules: PageRule[], zone: cloudflare.Zone) {
+  for (const pageRule of pageRules) {
+    const { name, ...args } = pageRule;
+    new cloudflare.PageRule(name, {
+      ...args,
+      zoneId: zone.id,
+    });
+  }
 }
