@@ -1,15 +1,22 @@
 import * as cloudflare from "@pulumi/cloudflare";
 import { DnsRecord, PageRule, Site } from "./types";
 
-const BASE_DOMAIN_LINKVT = "linkvt.de";
 const CLOUDFLARE_DUMMY_IP = "192.0.2.1";
 
 const sites: Site[] = [
   {
-    baseDomain: BASE_DOMAIN_LINKVT,
+    baseDomain: "linkvt.de",
     records: [
-      { type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true },
-      { name: "www", type: "CNAME", value: "linkvt.github.io" },
+      {
+        type: "A",
+        value: CLOUDFLARE_DUMMY_IP,
+        proxied: true,
+      },
+      {
+        name: "www",
+        type: "CNAME",
+        value: "linkvt.github.io",
+      },
       {
         id: "mx-1",
         type: "MX",
@@ -38,7 +45,11 @@ const sites: Site[] = [
         type: "TXT",
         value: `google-site-verification=EkDgV6CTuuKRIdXqWzug81h1nUJ0gYpDYOhgwIT0v4c`,
       },
-      { name: "em585", type: "CNAME", value: "u28506693.wl194.sendgrid.net" },
+      {
+        name: "em585",
+        type: "CNAME",
+        value: "u28506693.wl194.sendgrid.net",
+      },
       {
         name: "s1._domainkey",
         type: "CNAME",
@@ -56,32 +67,56 @@ const sites: Site[] = [
         actions: {
           forwardingUrl: {
             statusCode: 301,
-            url: `https://www.${BASE_DOMAIN_LINKVT}/$1`,
+            url: "https://www.linkvt.de/$1",
           },
         },
-        target: `${BASE_DOMAIN_LINKVT}/*`,
+        target: "linkvt.de/*",
+      },
+    ],
+  },
+  {
+    baseDomain: "vincentlink.de",
+    records: [{ type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true }],
+    pageRules: [
+      {
+        name: "redirect-to-www.linkvt.de",
+        actions: {
+          forwardingUrl: {
+            statusCode: 301,
+            url: "https://www.linkvt.de/$1",
+          },
+        },
+        target: "vincentlink.de/*",
       },
     ],
   },
 ];
 
 for (const site of sites) {
-  const zone = deployZone(site.baseDomain);
+  const zone = createZone(site.baseDomain);
 
-  deployRecords(site.records ?? [], zone);
-  deployPageRules(site.pageRules ?? [], zone);
+  createRecords(site.baseDomain, zone, site.records);
+  createPageRules(site.baseDomain, zone, site.pageRules);
 }
 
-function deployZone(domain: string) {
+function createZone(domain: string) {
   return new cloudflare.Zone(domain, {
     zone: domain,
   });
 }
 
-function deployRecords(records: DnsRecord[], zone: cloudflare.Zone) {
+function createRecords(
+  domain: string,
+  zone: cloudflare.Zone,
+  records?: DnsRecord[]
+) {
+  if (!records) {
+    return;
+  }
+
   for (const record of records) {
     const name = record.name?.length ? record.name : "@"; // @ has to be used instead of empty string
-    const id = record.id ?? `${record.type}-${name}`;
+    const id = `${domain}-${record.id ?? record.type + "-" + name}`;
 
     new cloudflare.Record(id, {
       ...record,
@@ -92,10 +127,18 @@ function deployRecords(records: DnsRecord[], zone: cloudflare.Zone) {
   }
 }
 
-function deployPageRules(pageRules: PageRule[], zone: cloudflare.Zone) {
+function createPageRules(
+  domain: string,
+  zone: cloudflare.Zone,
+  pageRules?: PageRule[]
+) {
+  if (!pageRules) {
+    return;
+  }
+
   for (const pageRule of pageRules) {
     const { name, ...args } = pageRule;
-    new cloudflare.PageRule(name, {
+    new cloudflare.PageRule(`${domain}-${name}`, {
       ...args,
       zoneId: zone.id,
     });
