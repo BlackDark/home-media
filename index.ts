@@ -85,7 +85,7 @@ const sites: Site[] = [
         name: "redirect-to-www.linkvt.de",
         actions: {
           forwardingUrl: {
-            statusCode: 301,
+            statusCode: 302,
             url: "https://www.linkvt.de/$2",
           },
         },
