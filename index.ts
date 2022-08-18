@@ -76,17 +76,20 @@ const sites: Site[] = [
   },
   {
     baseDomain: "vincentlink.de",
-    records: [{ type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true }],
+    records: [
+      { type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true },
+      { type: "A", name: "*", value: CLOUDFLARE_DUMMY_IP, proxied: true },
+    ],
     pageRules: [
       {
         name: "redirect-to-www.linkvt.de",
         actions: {
           forwardingUrl: {
             statusCode: 301,
-            url: "https://www.linkvt.de/$1",
+            url: "https://www.linkvt.de/$2",
           },
         },
-        target: "vincentlink.de/*",
+        target: "*vincentlink.de/*",
       },
     ],
   },
