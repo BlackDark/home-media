@@ -3,3 +3,4 @@
     - base
     - fail2ban
     - geerlingguy.docker
+    - traefik

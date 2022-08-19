@@ -1,0 +1,31 @@
+- name: create traefik directory
+  file:
+    path: "{{ traefik_configuration_dir }}"
+    state: directory
+    owner: root
+    group: root
+
+- name: copy traefik config
+  template:
+    src: traefik.yml.j2
+    dest: "{{ traefik_configuration_dir }}/traefik.yml"
+    mode: 0600
+  register: traefik_configuration
+
+- name: copy traefik services config
+  template:
+    src: traefik-services.yml.j2
+    dest: "{{ traefik_dynamic_config_file }}"
+    mode: 0600
+
+- name: start the traefik container
+  docker_container:
+    name: traefik
+    image: traefik:v2.8.3
+    restart: "{{ traefik_configuration.changed }}"
+    restart_policy: unless-stopped
+    ports:
+      - 0.0.0.0:80:80
+      - 0.0.0.0:443:443
+    volumes:
+      - "{{ traefik_configuration_dir }}:{{ traefik_configuration_dir }}"

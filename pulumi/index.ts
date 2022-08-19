@@ -60,6 +60,12 @@ const sites: Site[] = [
         type: "CNAME",
         value: "s2.domainkey.u28506693.wl194.sendgrid.net",
       },
+      {
+        name: "*.home",
+        type: "CNAME",
+        value: "v21904.1blu.de",
+        proxied: true,
+      },
     ],
     pageRules: [
       {
