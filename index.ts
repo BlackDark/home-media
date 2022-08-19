@@ -79,6 +79,29 @@ const sites: Site[] = [
     records: [
       { type: "A", value: CLOUDFLARE_DUMMY_IP, proxied: true },
       { type: "A", name: "*", value: CLOUDFLARE_DUMMY_IP, proxied: true },
+      {
+        id: "mx-1",
+        type: "MX",
+        value: "route1.mx.cloudflare.net",
+        priority: 72,
+      },
+      {
+        id: "mx-2",
+        type: "MX",
+        value: "route2.mx.cloudflare.net",
+        priority: 70,
+      },
+      {
+        id: "mx-3",
+        type: "MX",
+        value: "route3.mx.cloudflare.net",
+        priority: 33,
+      },
+      {
+        id: "spf",
+        type: "TXT",
+        value: "v=spf1 include:_spf.mx.cloudflare.net ~all",
+      },
     ],
     pageRules: [
       {
