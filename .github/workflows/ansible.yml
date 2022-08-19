@@ -1,0 +1,48 @@
+name: Ansible
+
+on:
+  push:
+    paths:
+      - ansible/**
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: ansible
+
+jobs:
+  ansible:
+    name: Ansible
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install ansible and other dependencies with pip
+        run: pip install -r requirements.txt
+
+      - name: Run ansible-lint
+        run: ansible-lint -vvv
+        env:
+          # These tell ansible-lint to use github compatible annotation format:
+          GITHUB_ACTIONS: "true"
+          GITHUB_WORKFLOW: "{{ github.workflow.name }}"
+
+      - name: Install ansible-galaxy dependencies
+        run: ansible-galaxy install -r requirements.yml
+
+      - name: Store the SSH private key locally
+        run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Dry-Run ansible-playbook
+        run: ansible-playbook --check --diff setup.yml
+
+      - name: Rollout ansible-playbook on main branch
+        if: github.ref == 'refs/heads/main'
+        run: ansible-playbook setup.yml
