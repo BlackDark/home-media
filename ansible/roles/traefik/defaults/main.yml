@@ -1,5 +1,5 @@
 traefik_configuration_dir: /etc/traefik
 traefik_dynamic_config_file: "{{ traefik_configuration_dir }}/traefik-services.yml"
 
-base_domain: home.linkvt.de
+base_domain: linkvt.de
 tunnel_ip: 100.91.165.113

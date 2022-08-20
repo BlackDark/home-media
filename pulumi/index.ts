@@ -61,7 +61,7 @@ const sites: Site[] = [
         value: "s2.domainkey.u28506693.wl194.sendgrid.net",
       },
       {
-        name: "*.home",
+        name: "*",
         type: "CNAME",
         value: "v21904.1blu.de",
         proxied: true,

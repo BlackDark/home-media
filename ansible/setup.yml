@@ -3,4 +3,5 @@
     - base
     - fail2ban
     - geerlingguy.docker
-    - traefik
+    - role: traefik
+      tags: traefik
