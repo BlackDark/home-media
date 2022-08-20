@@ -2,7 +2,13 @@ name: Pulumi
 
 on:
   push:
+    paths:
+      - pulumi/**
   workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: pulumi
 
 jobs:
   pulumi:
@@ -22,6 +28,7 @@ jobs:
         with:
           command: preview
           stack-name: prod
+          work-dir: pulumi
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
@@ -31,5 +38,6 @@ jobs:
         with:
           command: up
           stack-name: prod
+          work-dir: pulumi
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

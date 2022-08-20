@@ -1,0 +1,7 @@
+- hosts: all
+  roles:
+    - base
+    - fail2ban
+    - geerlingguy.docker
+    - role: traefik
+      tags: traefik

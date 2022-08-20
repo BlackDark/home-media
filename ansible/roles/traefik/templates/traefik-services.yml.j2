@@ -1,0 +1,17 @@
+http:
+  routers:
+    bitwarden:
+      rule: "Host(`bitwarden.{{ base_domain }}`)"
+      service: bitwarden
+    homeassistant:
+      rule: "Host(`home-assistant.{{ base_domain }}`)"
+      service: home-assistant
+  services:
+    bitwarden:
+      loadBalancer:
+        servers:
+          - url: "http://{{ tunnel_ip }}:7277"
+    home-assistant:
+      loadBalancer:
+        servers:
+          - url: "http://{{ tunnel_ip }}:8122"
