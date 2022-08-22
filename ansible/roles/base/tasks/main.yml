@@ -11,5 +11,16 @@
       - ca-certificates
       - curl
       - software-properties-common
+      - unattended-upgrades
     state: latest
     update_cache: true
+
+- name: update the unattended upgrade configuration
+  copy:
+    src: 50unattended-upgrades
+    dest: /etc/apt/apt.conf.d
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - restart unattended-upgrades
