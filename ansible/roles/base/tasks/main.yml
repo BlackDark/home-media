@@ -1,10 +1,10 @@
-- name: install aptitude
+- name: Install aptitude
   apt:
     name: aptitude
     state: latest
     update_cache: true
 
-- name: install base packages
+- name: Install base packages
   apt:
     pkg:
       - apt-transport-https
@@ -15,7 +15,7 @@
     state: latest
     update_cache: true
 
-- name: update the unattended upgrade configuration
+- name: Update the unattended upgrade configuration
   copy:
     src: 50unattended-upgrades
     dest: /etc/apt/apt.conf.d
@@ -23,4 +23,4 @@
     group: root
     mode: "0644"
   notify:
-    - restart unattended-upgrades
+    - Restart unattended-upgrades

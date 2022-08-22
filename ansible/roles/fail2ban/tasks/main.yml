@@ -1,10 +1,10 @@
-- name: install fail2ban
+- name: Install fail2ban
   apt:
     name: fail2ban
     state: latest
     update_cache: true
 
-- name: autostart fail2ban
+- name: Autostart fail2ban
   systemd:
     name: fail2ban
     state: started

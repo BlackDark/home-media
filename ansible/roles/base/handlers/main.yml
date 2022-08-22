@@ -1,4 +1,4 @@
-- name: restart unattended-upgrades
+- name: Restart unattended-upgrades
   systemd:
     name: unattended-upgrades
     enabled: true
