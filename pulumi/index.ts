@@ -66,6 +66,11 @@ const sites: Site[] = [
         value: "v21904.1blu.de",
         proxied: true,
       },
+      {
+        name: "_dmarc",
+        type: "TXT",
+        value: "v=DMARC1; p=quarantine; rua=mailto:mail@linkvt.de",
+      },
     ],
     pageRules: [
       {
