@@ -1,5 +1,7 @@
 traefik_configuration_dir: /etc/traefik
+traefik_log_dir: /var/log/traefik
 traefik_dynamic_config_file: "{{ traefik_configuration_dir }}/traefik-services.yml"
+traefik_container_log_dir: /var/log
 
 base_domain: linkvt.de
 tunnel_ip: 100.91.165.113

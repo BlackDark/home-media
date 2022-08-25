@@ -12,6 +12,12 @@ entryPoints:
       tls:
         certResolver: lets-encrypt
 
+accessLog:
+  filePath: "{{ traefik_container_log_dir }}/access.log"
+  filters:
+    statusCodes:
+      - "400-499"
+
 providers:
   file:
     filename: {{ traefik_dynamic_config_file }}

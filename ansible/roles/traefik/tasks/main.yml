@@ -6,6 +6,14 @@
     group: root
     mode: 0755
 
+- name: Create traefik logs directory
+  file:
+    path: "{{ traefik_log_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Copy traefik config
   template:
     src: traefik.yml.j2
@@ -30,3 +38,4 @@
       - 0.0.0.0:443:443
     volumes:
       - "{{ traefik_configuration_dir }}:{{ traefik_configuration_dir }}"
+      - "{{ traefik_log_dir }}:{{ traefik_container_log_dir }}"
