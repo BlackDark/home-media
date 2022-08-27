@@ -2,6 +2,10 @@
   roles:
     - base
     - fail2ban
-    - geerlingguy.docker
+    - role: geerlingguy.docker
+      vars:
+        docker_daemon_options:
+          log-driver: "local"
+
     - role: traefik
       tags: traefik

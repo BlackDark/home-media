@@ -6,6 +6,25 @@
     group: root
     mode: 0755
 
+- name: Create traefik logs directory
+  file:
+    path: "{{ traefik_log_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Fetch the Cloudflare IP ranges
+  uri:
+    url: https://www.cloudflare.com/ips-v4
+    return_content: true
+  register: cloudflare_ip_request
+  check_mode: false # skip check mode here to not break the next tasks
+
+- name: Parse the Cloudflare IP ranges
+  set_fact:
+    cloudflare_ips: "{{ cloudflare_ip_request.content.split() }}"
+
 - name: Copy traefik config
   template:
     src: traefik.yml.j2
@@ -30,3 +49,4 @@
       - 0.0.0.0:443:443
     volumes:
       - "{{ traefik_configuration_dir }}:{{ traefik_configuration_dir }}"
+      - "{{ traefik_log_dir }}:{{ traefik_container_log_dir }}"
