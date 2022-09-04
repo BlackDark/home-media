@@ -2,11 +2,13 @@
   apt:
     pkg:
       - rtorrent
-      - transmission
     state: latest
     update_cache: true
 
 - name: Uninstall removed packages
   apt:
     pkg:
+      - transmission
     state: absent
+    purge: true
+    autoremove: true
