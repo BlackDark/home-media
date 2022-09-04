@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: v21904.1blu.de
   roles:
     - base
     - fail2ban

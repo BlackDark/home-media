@@ -41,8 +41,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Dry-Run ansible-playbook
-        run: ansible-playbook --check --diff setup.yml
+        run: ansible-playbook --check --diff setup-1blu.yml
 
       - name: Rollout ansible-playbook on main branch
         if: github.ref == 'refs/heads/main'
-        run: ansible-playbook setup.yml
+        run: ansible-playbook setup-1blu.yml
