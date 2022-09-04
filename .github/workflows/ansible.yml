@@ -40,6 +40,9 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
+      - name: Store the ansible-vault password locally
+        run: echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > .vault_pass
+
       - name: Dry-Run ansible-playbook
         run: ansible-playbook --check --diff setup-1blu.yml
 

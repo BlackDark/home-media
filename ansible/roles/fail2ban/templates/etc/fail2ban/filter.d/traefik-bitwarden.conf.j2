@@ -1,0 +1,7 @@
+[Definition]
+# sample logs
+# 159.48.53.163 - - [26/Aug/2022:20:32:22 +0000] "POST /identity/connect/token HTTP/2.0" 400 351 "-" "-" 56 "websecure-bitwarden@file" "http://100.91.165.113:7277" 72ms
+# 80.187.97.34 - - [27/Aug/2022:20:06:33 +0000] "POST /admin HTTP/2.0" 303 0 "-" "-" 164 "websecure-bitwarden@file" "http://100.91.165.113:7277" 68ms
+failregex = ^<HOST> \- \S+ \[\] \"\S+ /identity/connect/token.*\" 4\d\d .+$
+            ^<HOST> \- \S+ \[\] \"POST /admin.*\" 303 .+$
+ignoreregex =

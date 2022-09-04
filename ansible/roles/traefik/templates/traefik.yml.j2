@@ -19,6 +19,7 @@ accessLog:
   filePath: "{{ traefik_container_log_dir }}/access.log"
   filters:
     statusCodes:
+      - "303" # required due to strange Vaultwarden admin behaviour https://github.com/dani-garcia/vaultwarden/issues/2712
       - "400-499"
 
 providers:
