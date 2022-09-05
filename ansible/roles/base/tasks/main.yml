@@ -10,6 +10,7 @@
       - apt-transport-https
       - ca-certificates
       - curl
+      - python3-docker # to control containers with ansible
       - software-properties-common
       - unattended-upgrades
     state: latest
