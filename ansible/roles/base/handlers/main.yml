@@ -3,3 +3,6 @@
     name: unattended-upgrades
     enabled: true
     state: restarted
+
+- name: Reboot
+  reboot:
