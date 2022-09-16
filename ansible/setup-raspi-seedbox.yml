@@ -1,8 +1,10 @@
 - hosts: raspi-seedbox
+  gather_facts: false
   roles:
     - base
     - role: geerlingguy.docker
       vars:
         docker_daemon_options:
           log-driver: "local"
+    # - nordvpn # TODO uninstall
     - seedbox

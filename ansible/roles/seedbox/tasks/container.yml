@@ -1,0 +1,35 @@
+- name: "{{ item.name }} - Set config dir fact"
+  set_fact:
+    config_dir: "{{ p2p_config_dir }}/{{ item.name }}"
+
+- name: "{{ item.name }} - Set base facts"
+  set_fact:
+    base_env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Europe/Berlin
+    base_volumes:
+      - "{{ config_dir }}:/config"
+      - "{{ downloads_dir }}:/downloads"
+
+- name: "{{ item.name }} - Set container facts"
+  set_fact:
+    env: "{{ base_env | combine(item.env | default({})) }}"
+    volumes: "{{ base_volumes + (item.volumes | default([])) }}"
+
+- name: "{{ item.name }} - Create the config directory"
+  file:
+    state: directory
+    path: "{{ config_dir }}"
+    owner: 1000
+    group: 1000
+    mode: "0755"
+
+- name: "{{ item.name }} - Start the container"
+  docker_container:
+    name: "{{ item.name }}"
+    image: "{{ item.image }}"
+    restart_policy: unless-stopped
+    network_mode: container:{{ vpn_container_name }}
+    volumes: "{{ volumes }}"
+    env: "{{ env }}"
