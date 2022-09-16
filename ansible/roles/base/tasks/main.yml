@@ -13,8 +13,6 @@
       - python3-docker # to control containers with ansible
       - software-properties-common
       - unattended-upgrades
-    state: latest
-    update_cache: true
 
 - name: Update the unattended upgrade configuration
   copy:

@@ -1,0 +1,13 @@
+- name: Add the apt key
+  apt_key:
+    url: "https://pkgs.tailscale.com/stable/ubuntu/{{ ansible_distribution_release }}.noarmor.gpg"
+    state: present
+
+- name: Add the apt repository
+  apt_repository:
+    repo: "deb https://pkgs.tailscale.com/stable/ubuntu {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Install tailscale
+  apt:
+    name: tailscale
