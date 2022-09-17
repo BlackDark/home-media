@@ -2,7 +2,6 @@
   apt:
     name: aptitude
     state: latest
-    update_cache: true
 
 - name: Install base packages
   apt:

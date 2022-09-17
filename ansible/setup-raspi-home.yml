@@ -3,5 +3,5 @@
     - base
     - tailscale
     - geerlingguy.docker
-    - home-assistant
-    - pi-hole
+    - homeassistant
+    - pihole

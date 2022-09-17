@@ -1,5 +1,4 @@
 - hosts: raspi-seedbox
-  gather_facts: false
   roles:
     - base
     - geerlingguy.docker
