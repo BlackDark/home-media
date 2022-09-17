@@ -2,7 +2,4 @@
   roles:
     - base
     - tailscale
-    - role: geerlingguy.docker
-      vars:
-        docker_daemon_options:
-          log-driver: "local"
+    - geerlingguy.docker

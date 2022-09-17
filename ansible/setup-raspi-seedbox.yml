@@ -2,9 +2,6 @@
   gather_facts: false
   roles:
     - base
-    - role: geerlingguy.docker
-      vars:
-        docker_daemon_options:
-          log-driver: "local"
+    - geerlingguy.docker
     # - nordvpn # TODO uninstall
     - seedbox
