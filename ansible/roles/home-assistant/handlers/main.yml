@@ -1,0 +1,4 @@
+- name: Restart supervisor
+  systemd:
+    name: hassio-supervisor
+    state: restarted

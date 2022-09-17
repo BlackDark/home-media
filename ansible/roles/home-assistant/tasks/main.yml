@@ -1,0 +1,50 @@
+# see https://github.com/home-assistant/supervised-installer
+
+- name: Install base packages
+  apt:
+    pkg:
+      - apparmor
+      - curl
+      - dbus
+      - jq
+      - libglib2.0-bin
+      - network-manager
+      - systemd-journal-remote
+      - udisks2
+      - wget
+    state: latest
+
+- name: Disable ModemManager which conflicts with zigbee
+  systemd:
+    name: ModemManager
+    state: stopped
+    enabled: false
+
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+
+- name: Install the os agent
+  apt:
+    deb: "https://github.com/home-assistant/os-agent/releases/download/1.3.0/os-agent_1.3.0_linux_{{ ansible_architecture }}.deb"
+    state: present
+  when: "'os-agent' not in ansible_facts.packages"
+
+- name: Paused so you can install https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb manually
+  pause:
+  when: "'homeassistant-supervised' not in ansible_facts.packages"
+
+# - name: Install the supervisor # TODO not working as it sets x86 as default arch in the interactive post inst dialog
+#   apt:
+#     deb: https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+#     state: present
+#   when: "'homeassistant-supervised' not in ansible_facts.packages"
+
+# - name: Update the supervisor configuration # TODO this might be needed sudo dpkg-reconfigure homeassistant-supervised
+#   copy:
+#     src: hassio.json
+#     dest: /etc/hassio.json
+#     owner: root
+#     group: root
+#     mode: "0644"
+#   notify:
+#     - Restart supervisor
