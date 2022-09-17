@@ -29,7 +29,7 @@
   docker_container:
     name: "{{ item.name }}"
     image: "{{ item.image }}"
-    restart_policy: unless-stopped
+    restart_policy: always
     network_mode: container:{{ vpn_container_name }}
     volumes: "{{ volumes }}"
     env: "{{ env }}"
