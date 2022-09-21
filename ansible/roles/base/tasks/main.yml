@@ -2,7 +2,6 @@
   apt:
     name: aptitude
     state: latest
-    update_cache: true
 
 - name: Install base packages
   apt:
@@ -13,8 +12,8 @@
       - python3-docker # to control containers with ansible
       - software-properties-common
       - unattended-upgrades
+      - unzip
     state: latest
-    update_cache: true
 
 - name: Update the unattended upgrade configuration
   copy:
@@ -25,3 +24,18 @@
     mode: "0644"
   notify:
     - Restart unattended-upgrades
+
+- name: Set the hostname from the inventory
+  hostname:
+    name: "{{ inventory_hostname }}"
+  notify:
+    - Reboot
+
+- name: Create a valid /etc/hosts with the current hostname
+  template:
+    src: etc/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true

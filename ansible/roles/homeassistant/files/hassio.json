@@ -1,0 +1,5 @@
+{
+  "supervisor": "ghcr.io/home-assistant/aarch64-hassio-supervisor",
+  "machine": "raspberrypi4-64",
+  "data": "/usr/share/hassio"
+}

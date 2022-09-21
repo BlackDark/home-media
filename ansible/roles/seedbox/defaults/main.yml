@@ -1,0 +1,7 @@
+vpn_container_name: nordvpn
+
+p2p_base_dir: /data/p2p
+p2p_config_dir: "{{ p2p_base_dir }}/config"
+
+downloads_dir: "{{ p2p_base_dir }}/downloads"
+watch_dir: "{{ p2p_base_dir }}/watch"

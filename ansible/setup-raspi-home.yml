@@ -1,7 +1,7 @@
 - hosts: raspi-home
   roles:
     - base
-    - role: geerlingguy.docker
-      vars:
-        docker_daemon_options:
-          log-driver: "local"
+    - tailscale
+    - geerlingguy.docker
+    - homeassistant
+    - pihole

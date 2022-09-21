@@ -1,14 +1,84 @@
-- name: Install torrent packages
-  apt:
-    pkg:
-      - rtorrent
-    state: latest
-    update_cache: true
+# TODO
+# - check azinchen/nordvpn RECREATE_VPN_CRON
 
-- name: Uninstall removed packages
-  apt:
-    pkg:
-      - transmission
-    state: absent
-    purge: true
-    autoremove: true
+- name: Run tailscale ip
+  command: tailscale ip -4
+  changed_when: false
+  register: tailscale_ip_command
+
+- name: Parse the tailscale IP address
+  set_fact:
+    tailscale_ip: "{{ tailscale_ip_command.stdout }}"
+
+- name: Start the nordvpn container
+  docker_container:
+    name: "{{ vpn_container_name }}"
+    image: azinchen/nordvpn:2.1.2
+    restart_policy: unless-stopped # tmp enable again when it is working with tailscale
+    ports:
+      - 0.0.0.0:5055:5055 # overseerr
+      - 0.0.0.0:7878:7878 # radarr
+      - 0.0.0.0:8989:8989 # sonarr
+      - 0.0.0.0:9117:9117 # jackett
+      - 0.0.0.0:9696:9696 # prowlarr
+      - 0.0.0.0:9091:9091 # transmission
+      - 0.0.0.0:51413:51413 # transmission
+      - 0.0.0.0:51413:51413/udp # transmission
+    capabilities:
+      - net_admin
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    env:
+      USER: "{{ nordvpn_username }}"
+      PASS: "{{ nordvpn_password }}"
+      COUNTRY: DE
+      NETWORK: 10.0.0.0/24,100.0.0.0/8
+      GROUP: legacy_p2p
+      # RANDOM_TOP: 10
+      # RECREATE_VPN_CRON: 5 */3 * * *
+
+- name: Create data directories
+  file:
+    state: directory
+    path: /data
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create basic directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: 1000
+    group: 1000
+    mode: "0755"
+    recurse: true
+  loop:
+    - "{{ p2p_base_dir }}"
+    - "{{ downloads_dir }}"
+    - "{{ watch_dir }}"
+
+- name: Start all containers
+  include_tasks: container.yml
+  loop:
+    - name: transmission
+      image: lscr.io/linuxserver/transmission:3.00-r5-ls135
+      env:
+        TRANSMISSION_WEB_HOME: /flood-for-transmission/
+      #       # USER: username #optional
+      #       # PASS: password #optional
+      #       # WHITELIST: iplist #optional
+      #       # PEERPORT: peerport #optional
+      #       # HOST_WHITELIST: dnsname list #optional
+      volumes:
+        - "{{ p2p_base_dir }}/watch:/watch"
+    # - name: radarr
+    #   image: lscr.io/linuxserver/radarr:4.1.0.6175-ls152
+    # - name: sonarr
+    #   image: lscr.io/linuxserver/sonarr:3.0.9.1549-ls155
+    # - name: prowlarr
+    #   image: lscr.io/linuxserver/prowlarr:develop-0.4.5.1960-ls67
+    # - name: jackett
+    #   image: lscr.io/linuxserver/jackett:v0.20.1853-ls75
+    # - name: overseerr
+    #   image: lscr.io/linuxserver/overseerr:v1.29.1-ls42
