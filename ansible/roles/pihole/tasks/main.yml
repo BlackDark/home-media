@@ -27,7 +27,7 @@
 - name: Start the pihole container
   docker_container:
     name: pihole
-    image: pihole/pihole:2022.09.3
+    image: pihole/pihole:2022.09.4
     restart_policy: unless-stopped
     ports:
       - 10.0.0.2:53:53/tcp
