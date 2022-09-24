@@ -31,7 +31,7 @@
     env:
       USER: "{{ nordvpn_username }}"
       PASS: "{{ nordvpn_password }}"
-      COUNTRY: DE
+      COUNTRY: NL
       NETWORK: 10.0.0.0/24,100.0.0.0/8
       GROUP: legacy_p2p
       # RANDOM_TOP: 10
