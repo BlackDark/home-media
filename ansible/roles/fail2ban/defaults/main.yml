@@ -1,0 +1,3 @@
+fail2ban_config_dir: /etc/fail2ban
+fail2ban_container_dir: "{{ fail2ban_config_dir }}/container"
+fail2ban_container_config_dir: "{{ fail2ban_container_dir }}/fail2ban"

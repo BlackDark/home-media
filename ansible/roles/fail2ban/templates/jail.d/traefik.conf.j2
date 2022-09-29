@@ -1,0 +1,6 @@
+[traefik]
+enabled = true
+logpath = {{ traefik_log_dir }}/access.log
+filter = traefik
+chain = DOCKER-USER
+port = http,https

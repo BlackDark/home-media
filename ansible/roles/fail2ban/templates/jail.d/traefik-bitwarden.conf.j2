@@ -1,5 +1,6 @@
 [traefik-bitwarden]
-enabled = false
+enabled = true
 logpath = {{ traefik_log_dir }}/access.log
 filter = traefik-bitwarden
-action = cloudflare
+action = cloudflare-custom
+maxretry = 3
