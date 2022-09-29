@@ -4,7 +4,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Create traefik logs directory
   file:
@@ -12,7 +12,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Fetch the Cloudflare IP ranges
   uri:
@@ -29,14 +29,14 @@
   template:
     src: traefik.yml.j2
     dest: "{{ traefik_configuration_dir }}/traefik.yml"
-    mode: 0600
+    mode: "0600"
   register: traefik_configuration
 
 - name: Copy traefik services config
   template:
     src: traefik-services.yml.j2
     dest: "{{ traefik_dynamic_config_file }}"
-    mode: 0600
+    mode: "0600"
 
 - name: Start the traefik container
   docker_container:
