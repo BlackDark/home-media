@@ -1,0 +1,44 @@
+---
+# Homer configuration
+# defaults: https://github.com/bastienwirtz/homer/blob/main/src/assets/defaults.yml
+# icons: https://fontawesome.com/v5/search
+
+header: false
+
+services:
+  - name: Cloud
+    icon: fas fa-cloud
+    items:
+      - name: Bitwarden
+        logo: assets/tools/bitwarden.png
+        url: https://bitwarden.linkvt.de
+        target: _blank
+      - name: Home Assistant
+        logo: assets/tools/home-assistant.png
+        url: https://home-assistant.linkvt.de
+        target: _blank
+      - name: Transmission
+        logo: assets/tools/transmission.svg
+        url: http://10.0.0.61:9091/transmission/web/
+        target: _blank
+  - name: Network
+    icon: fas fa-network-wired
+    items:
+      - name: Pi-hole
+        logo: assets/tools/pi-hole.png
+        url: http://10.0.0.2:8080/admin
+        type: PiHole
+        target: _blank
+  - name: Other
+    icon: fas fa-house
+    items:
+      - name: Weather
+        location: Stuttgart
+        locationId: 2825297
+        apikey: e623be78f7ab4f85b84db97485c9c4d9
+        units: metric
+        type: OpenWeather
+      - name: Home Assistant (local)
+        logo: assets/tools/home-assistant.png
+        url: http://10.0.0.2:8122
+        target: _blank

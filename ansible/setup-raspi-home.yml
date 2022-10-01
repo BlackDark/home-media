@@ -5,3 +5,5 @@
     - geerlingguy.docker
     - homeassistant
     - pihole
+    - role: homer
+      tags: homer
