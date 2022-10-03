@@ -4,3 +4,25 @@ docker_daemon_options:
   storage-driver: "overlay2"
 docker_users:
   - ubuntu
+
+services:
+  bitwarden:
+    host: 10.0.0.2
+    port: 7277
+  home-assistant:
+    host: 10.0.0.2
+    port: 8122
+    aliases:
+      - homeassistant
+  homer:
+    host: 10.0.0.2
+    port: 8081
+  pi-hole:
+    host: 10.0.0.2
+    port: 8080
+    path: /admin/
+    aliases:
+      - pihole
+  transmission:
+    host: 10.0.0.61
+    port: 9091

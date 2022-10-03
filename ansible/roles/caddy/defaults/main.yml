@@ -1,0 +1,2 @@
+caddy_dir: /etc/caddy
+caddy_data_dir: "{{ caddy_dir }}/data"

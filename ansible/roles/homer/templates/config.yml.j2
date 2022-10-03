@@ -19,14 +19,14 @@ services:
         target: _blank
       - name: Transmission
         logo: assets/tools/transmission.svg
-        url: http://10.0.0.61:9091/transmission/web/
+        url: http://transmission.10.0.0.2.sslip.io/
         target: _blank
   - name: Network
     icon: fas fa-network-wired
     items:
       - name: Pi-hole
         logo: assets/tools/pi-hole.png
-        url: http://10.0.0.2:8080/admin
+        url: http://pi-hole.10.0.0.2.sslip.io/
         type: PiHole
         target: _blank
   - name: Other
@@ -38,7 +38,11 @@ services:
         apikey: e623be78f7ab4f85b84db97485c9c4d9
         units: metric
         type: OpenWeather
+      - name: Bitwarden (local)
+        logo: assets/tools/bitwarden.png
+        url: http://bitwarden.10.0.0.2.sslip.io/
+        target: _blank
       - name: Home Assistant (local)
         logo: assets/tools/home-assistant.png
-        url: http://10.0.0.2:8122
+        url: http://home-assistant.10.0.0.2.sslip.io/
         target: _blank

@@ -1,0 +1,34 @@
+- name: Create caddy directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - "{{ caddy_dir }}"
+    - "{{ caddy_data_dir }}"
+
+- name: Copy the Caddyfile
+  template:
+    src: "{{ item }}"
+    dest: "{{ caddy_dir }}/{{ item | replace('.j2', '') }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items:
+    - Caddyfile.j2
+  register: caddy_configuration
+
+- name: Start the caddy container
+  docker_container:
+    name: caddy
+    image: caddy:2.6.1
+    restart: "{{ caddy_configuration.changed }}"
+    restart_policy: unless-stopped
+    ports:
+      - 0.0.0.0:80:80
+      - 0.0.0.0:443:443
+    volumes:
+      - "{{ caddy_dir }}/Caddyfile:/etc/caddy/Caddyfile"
+      - "{{ caddy_data_dir }}:/data"

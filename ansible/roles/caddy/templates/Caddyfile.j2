@@ -1,0 +1,35 @@
+{
+  auto_https off
+}
+
+http:// {
+{% for name, props in services.items() %}
+  @{{ name }} header_regexp Host ^{{ name }}\..*
+  handle @{{ name }} {
+{% if props.path is defined %}
+    rewrite * {{ props.path }}{path}
+{% endif %}
+    reverse_proxy {{ props.host }}:{{ props.port }}
+  }
+
+{% if props.aliases is defined %}
+{% for alias in props.aliases %}
+  @{{ alias }} header_regexp host_{{ alias }} Host ^{{ alias }}\.(.*)
+  handle @{{ alias }} {
+    redir {http.request.scheme}://{{ name }}.{re.host_{{ alias }}.1}
+  }
+
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+  @catch_all header_regexp host Host ^[a-zA-Z-_]+\.(.*)
+  handle @catch_all {
+    redir {http.request.scheme}://{re.host.1}
+  }
+
+  # Fallback for otherwise unhandled domains
+  handle {
+    reverse_proxy {{ services.homer.host }}:{{ services.homer.port }}
+  }
+}
