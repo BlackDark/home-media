@@ -12,23 +12,19 @@ services:
       - name: Bitwarden
         logo: assets/tools/bitwarden.png
         url: https://bitwarden.linkvt.de
-        target: _blank
       - name: Home Assistant
         logo: assets/tools/home-assistant.png
         url: https://home-assistant.linkvt.de
-        target: _blank
       - name: Transmission
         logo: assets/tools/transmission.svg
-        url: http://transmission.10.0.0.2.sslip.io/
-        target: _blank
+        url: http://transmission.{{ load_balancer_ip }}.sslip.io/
   - name: Network
     icon: fas fa-network-wired
     items:
       - name: Pi-hole
         logo: assets/tools/pi-hole.png
-        url: http://pi-hole.10.0.0.2.sslip.io/
+        url: http://pi-hole.{{ load_balancer_ip }}.sslip.io/
         type: PiHole
-        target: _blank
   - name: Other
     icon: fas fa-house
     items:
@@ -40,9 +36,7 @@ services:
         type: OpenWeather
       - name: Bitwarden (local)
         logo: assets/tools/bitwarden.png
-        url: http://bitwarden.10.0.0.2.sslip.io/
-        target: _blank
+        url: http://bitwarden.{{ load_balancer_ip }}.sslip.io/
       - name: Home Assistant (local)
         logo: assets/tools/home-assistant.png
-        url: http://home-assistant.10.0.0.2.sslip.io/
-        target: _blank
+        url: http://home-assistant.{{ load_balancer_ip }}.sslip.io/

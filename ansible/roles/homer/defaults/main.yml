@@ -1,1 +1,4 @@
-homer_config_dir: /etc/homer
+load_balancer_ip: "{{ local_load_balancer_ip }}"
+homer_instance: homer
+homer_config_dir: /etc/{{ homer_instance }}
+homer_port: "{{ services.homer.port }}"

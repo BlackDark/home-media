@@ -5,6 +5,9 @@ docker_daemon_options:
 docker_users:
   - ubuntu
 
+local_load_balancer_ip: 10.0.0.2
+vpn_load_balancer_ip: 100.91.165.113
+
 services:
   bitwarden:
     host: 10.0.0.2
@@ -17,6 +20,9 @@ services:
   homer:
     host: 10.0.0.2
     port: 8081
+  homer-remote:
+    host: 10.0.0.2
+    port: 8082
   pi-hole:
     host: 10.0.0.2
     port: 8080

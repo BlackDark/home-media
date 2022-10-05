@@ -2,6 +2,13 @@
   auto_https off
 }
 
+http://{{ vpn_load_balancer_ip }}.sslip.io {
+  # Fallback for otherwise unhandled domains
+  handle {
+    reverse_proxy {{ services['homer-remote'].host }}:{{ services['homer-remote'].port }}
+  }
+}
+
 http:// {
 {% for name, props in services.items() %}
   @{{ name }} header_regexp Host ^{{ name }}\..*
