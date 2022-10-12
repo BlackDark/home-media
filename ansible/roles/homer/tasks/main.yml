@@ -39,7 +39,7 @@
 - name: Start the homer container
   docker_container:
     name: "{{ homer_instance }}"
-    image: b4bz/homer:v22.08.1
+    image: b4bz/homer:v22.10.1
     restart_policy: unless-stopped
     ports:
       - 0.0.0.0:{{ homer_port }}:8080
