@@ -43,5 +43,6 @@
     restart_policy: unless-stopped
     ports:
       - 0.0.0.0:{{ homer_port }}:8080
-    volumes:
-      - "{{ homer_config_dir }}:/www/assets"
+    volumes: # mount the paths explicitly to not overwrite the icons folder
+      - "{{ homer_config_dir }}/tools:/www/assets/tools"
+      - "{{ homer_config_dir }}/config.yml:/www/assets/config.yml"
