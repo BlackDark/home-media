@@ -35,11 +35,13 @@
     mode: "0644"
   with_items:
     - config.yml.j2
+  register: homer_configuration
 
 - name: Start the homer container
   docker_container:
     name: "{{ homer_instance }}"
     image: b4bz/homer:v22.11.1
+    restart: "{{ homer_configuration.changed }}"
     restart_policy: unless-stopped
     ports:
       - 0.0.0.0:{{ homer_port }}:8080
