@@ -76,9 +76,9 @@
     #   image: lscr.io/linuxserver/radarr:4.1.0.6175-ls152
     # - name: sonarr
     #   image: lscr.io/linuxserver/sonarr:3.0.9.1549-ls155
-    # - name: prowlarr
-    #   image: lscr.io/linuxserver/prowlarr:develop-0.4.5.1960-ls67
-    # - name: jackett
-    #   image: lscr.io/linuxserver/jackett:v0.20.1853-ls75
+    - name: prowlarr
+      image: lscr.io/linuxserver/prowlarr:develop-0.4.5.1960-ls67
+    - name: jackett
+      image: lscr.io/linuxserver/jackett:v0.20.1853-ls75
     # - name: overseerr
     #   image: lscr.io/linuxserver/overseerr:v1.29.1-ls42

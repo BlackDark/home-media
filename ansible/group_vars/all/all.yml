@@ -32,3 +32,9 @@ services:
   transmission:
     host: 10.0.0.61
     port: 9091
+  prowlarr:
+    host: 10.0.0.61
+    port: 9696
+  jackett:
+    host: 10.0.0.61
+    port: 9117
