@@ -18,6 +18,12 @@ services:
       - name: Transmission
         logo: assets/tools/transmission.svg
         url: http://transmission.{{ load_balancer_ip }}.sslip.io/
+      - name: Jackett
+        logo: assets/tools/jackett.png
+        url: http://jackett.{{ load_balancer_ip }}.sslip.io/
+      - name: Prowlarr
+        logo: assets/tools/prowlarr.png
+        url: http://prowlarr.{{ load_balancer_ip }}.sslip.io/
   - name: Network
     icon: fas fa-network-wired
     items:
