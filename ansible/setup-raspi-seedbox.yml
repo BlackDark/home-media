@@ -3,4 +3,5 @@
     - base
     - geerlingguy.docker
     # - nordvpn # TODO uninstall
-    - seedbox
+    - role: seedbox
+      tags: seedbox
