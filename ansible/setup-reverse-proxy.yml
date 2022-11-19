@@ -1,0 +1,12 @@
+- hosts: reverse-proxy
+  roles:
+    - base
+    - tailscale
+    - role: geerlingguy.docker
+      vars:
+        docker_daemon_options:
+          log-driver: "local"
+    - role: fail2ban
+      tags: fail2ban
+    - role: traefik
+      tags: traefik
