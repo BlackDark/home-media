@@ -44,8 +44,8 @@ jobs:
         run: echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > .vault_pass
 
       - name: Dry-Run ansible-playbook
-        run: ansible-playbook --check --diff setup-1blu.yml
+        run: ansible-playbook --check --diff setup-reverse-proxy.yml
 
       - name: Rollout ansible-playbook on main branch
         if: github.ref == 'refs/heads/main'
-        run: ansible-playbook setup-1blu.yml
+        run: ansible-playbook setup-reverse-proxy.yml

@@ -1,6 +1,7 @@
-- hosts: v21904.1blu.de
+- hosts: reverse-proxy
   roles:
     - base
+    - tailscale
     - role: geerlingguy.docker
       vars:
         docker_daemon_options:
