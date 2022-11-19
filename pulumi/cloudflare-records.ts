@@ -9,6 +9,17 @@ export function buildCloudflareRecords(reverseProxyIp: Output<string>): Site[] {
       baseDomain: "linkvt.de",
       records: [
         {
+          type: "A",
+          value: CLOUDFLARE_DUMMY_IP,
+          proxied: true,
+        },
+        {
+          name: "*",
+          type: "A",
+          value: reverseProxyIp,
+          proxied: true,
+        },
+        {
           name: "www",
           type: "CNAME",
           value: "linkvt.github.io",
@@ -55,12 +66,6 @@ export function buildCloudflareRecords(reverseProxyIp: Output<string>): Site[] {
           name: "s2._domainkey",
           type: "CNAME",
           value: "s2.domainkey.u28506693.wl194.sendgrid.net",
-        },
-        {
-          name: "*",
-          type: "A",
-          value: reverseProxyIp,
-          proxied: true,
         },
         {
           name: "_dmarc",
