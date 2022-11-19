@@ -1,11 +1,11 @@
 - hosts: v21904.1blu.de
   roles:
     - base
-    - role: fail2ban
-      tags: fail2ban
     - role: geerlingguy.docker
       vars:
         docker_daemon_options:
           log-driver: "local"
+    - role: fail2ban
+      tags: fail2ban
     - role: traefik
       tags: traefik
