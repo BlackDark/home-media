@@ -110,8 +110,8 @@ export function setupOracleCloud() {
       },
       shape: SHAPE_NAME,
       shapeConfig: {
-        ocpus: 4,
-        memoryInGbs: 24,
+        ocpus: 2,
+        memoryInGbs: 12,
       },
       sourceDetails: {
         sourceType: "image",
