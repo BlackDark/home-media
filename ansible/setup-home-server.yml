@@ -1,0 +1,18 @@
+- hosts: home-server
+  roles:
+    - base
+    - role: artis3n.tailscale
+    - geerlingguy.docker
+    # - homeassistant
+    # - pihole
+    # - role: caddy
+    #   tags: caddy
+    # - role: homer
+    #   tags: homer
+    #   message: local
+    # - role: homer
+    #   tags: homer
+    #   message: vpn
+    #   homer_instance: homer-remote
+    #   homer_port: 8082 # see group_vars/all
+    #   load_balancer_ip: 100.91.165.113 # see group_vars/all
