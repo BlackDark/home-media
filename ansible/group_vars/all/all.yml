@@ -7,6 +7,7 @@ docker_users:
 
 local_load_balancer_ip: 10.0.0.2
 vpn_load_balancer_ip: 100.91.165.113
+k8s_load_balancer_ip: 10.0.0.5
 
 services:
   bitwarden:
