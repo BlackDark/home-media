@@ -1,6 +1,8 @@
 - hosts: home-server
   roles:
     - base
+    - role: zfs
+      tags: zfs
     - role: artis3n.tailscale
     - geerlingguy.docker
     # - homeassistant
