@@ -6,6 +6,7 @@ microk8s_addons:
   - dns
   - argocd
   - metallb:{{ k8s_load_balancer_ip }}/32
+  - metrics-server
   - traefik
 
 microk8s_addons_disabled: []
