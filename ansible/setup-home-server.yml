@@ -5,6 +5,8 @@
       tags: zfs
     - role: microk8s
       tags: microk8s
+    - role: home-server
+      tags: home-server
     - role: artis3n.tailscale
     - geerlingguy.docker
     # - homeassistant
