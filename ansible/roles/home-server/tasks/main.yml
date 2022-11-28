@@ -1,0 +1,21 @@
+- name: Create data directories
+  file:
+    state: directory
+    path: /data
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create basic directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: 1000
+    group: 1000
+    mode: "0755"
+    recurse: true
+  loop:
+    - "/data/apps"
+    - "/data/media"
+    - "/data/media/"
+    - "/data/media"

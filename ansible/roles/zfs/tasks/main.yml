@@ -1,0 +1,13 @@
+- name: Install zfs utils
+  apt:
+    name: zfsutils-linux
+
+- name: Create the data ZFS pool
+  command: zpool create
+    data
+    mirror
+    {{ zpool_devices | join(' ') }}
+    -O compression=gzip
+    -O secondarycache=all
+    creates=/data
+    -o ashift=12
