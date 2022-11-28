@@ -1,3 +1,6 @@
 {
   extends: ["github>linkvt/renovate-base"],
+  kubernetes: {
+    fileMatch: ["kubernetes/.+\\.ya?ml$"],
+  },
 }
