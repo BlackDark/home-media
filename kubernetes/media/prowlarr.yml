@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: media-app-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr:nightly-0.4.10.2099-ls446
+          ports:
+            - name: http
+              containerPort: 9696
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /config
+              name: app-data
+              subPath: prowlarr
+            - mountPath: /data
+              name: media
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: prowlarr
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr
+spec:
+  rules:
+    - host: prowlarr.10.0.0.5.sslip.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: prowlarr
+                port:
+                  name: http

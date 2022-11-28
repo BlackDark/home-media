@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+spec:
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: media-app-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+      containers:
+        - name: sabnzbd
+          image: lscr.io/linuxserver/sabnzbd:3.7.0-ls86
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /config
+              name: app-data
+              subPath: sabnzbd
+            - mountPath: /downloads
+              name: media
+              subPath: usenet/
+            - mountPath: /incomplete-downloads
+              name: media
+              subPath: usenet/_incomplete
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sabnzbd
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: sabnzbd
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sabnzbd
+spec:
+  rules:
+    - host: sabnzbd.10.0.0.5.sslip.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: sabnzbd
+                port:
+                  name: http
