@@ -17,5 +17,9 @@
   loop:
     - "/data/apps"
     - "/data/media"
-    - "/data/media/"
-    - "/data/media"
+    - "/data/media/all"
+    - "/data/media/all/tv"
+    - "/data/media/all/trash"
+    - "/data/media/all/audio"
+    - "/data/media/all/books"
+    - "/data/media/all/movies"
