@@ -5,9 +5,11 @@ resources:
   - config.yml
   - jackett.yml
   - jellyfin.yml
+  - lidarr.yml
   - namespace.yml
   - prowlarr.yml
   - radarr.yml
+  - readarr.yml
   - sabnzbd.yml
   - sonarr.yml
   - storage-app.yml
