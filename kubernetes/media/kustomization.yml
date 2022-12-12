@@ -11,6 +11,7 @@ resources:
   - radarr.yml
   - readarr.yml
   - sabnzbd.yml
+  - samba.yml
   - sonarr.yml
   - storage-app.yml
   - storage-media.yml
