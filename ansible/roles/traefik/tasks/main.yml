@@ -41,7 +41,7 @@
 - name: Start the traefik container
   docker_container:
     name: traefik
-    image: traefik:v2.9.4
+    image: traefik:v2.9.6
     restart: "{{ traefik_configuration.changed }}"
     restart_policy: unless-stopped
     ports:
