@@ -1,4 +1,6 @@
-# Kubernetes Resources
+# Pulumi
 
 ## Setup
-- `brew install kluctl/tap/kluctl`
+
+- Install pulumi, e.g. via `brew install pulumi`
+- Install the dependencies

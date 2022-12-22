@@ -1,5 +1,0 @@
-deployments:
-  - path: media
-
-commonLabels:
-  de.linkvt/stack: home-server

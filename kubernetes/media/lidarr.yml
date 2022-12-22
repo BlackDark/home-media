@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+spec:
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: media-app-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+      containers:
+        - name: lidarr
+          image: lscr.io/linuxserver/lidarr:1.0.2.2592-ls103
+          ports:
+            - name: http
+              containerPort: 8686
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /config
+              name: app-data
+              subPath: lidarr
+            - mountPath: /data
+              name: media
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: lidarr
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lidarr
+spec:
+  rules:
+    - host: lidarr.10.0.0.5.sslip.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: lidarr
+                port:
+                  name: http

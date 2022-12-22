@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: samba
+spec:
+  selector:
+    matchLabels:
+      app: samba
+  template:
+    metadata:
+      labels:
+        app: samba
+    spec:
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+        - name: config
+          configMap:
+            name: samba-config
+      containers:
+        - name: samba
+          image: ghcr.io/crazy-max/samba:4.16.7
+          ports:
+            - name: smb
+              containerPort: 445
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /media/data
+              name: media
+            - mountPath: /data/config.yml
+              name: config
+              subPath: config.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: samba
+spec:
+  type: NodePort
+  ports:
+    - port: 445
+      name: smb
+      targetPort: smb
+      nodePort: 30000
+  selector:
+    app: samba
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samba-config
+data:
+  config.yml: |
+    auth:
+      - user: media
+        group: media
+        uid: 1000
+        gid: 1000
+        password: gringotusnicht
+
+    global:
+      - "force user = media"
+      - "force group = media"
+
+    share:
+      - name: media
+        path: /media/data
+        browsable: yes
+        readonly: yes
+        guestok: no
+        # validusers: foo
+        # writelist: foo
+        # veto: no
+        # hidefiles: /_*/
+        recycle: no
