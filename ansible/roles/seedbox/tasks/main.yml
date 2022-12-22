@@ -52,7 +52,6 @@
     owner: 1000
     group: 1000
     mode: "0755"
-    recurse: true
   loop:
     - "{{ p2p_base_dir }}"
     - "{{ downloads_dir }}"
