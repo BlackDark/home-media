@@ -1,8 +1,8 @@
 import * as k8s from "@pulumi/kubernetes";
-import { deployCertManager } from "./cert-manager";
+import { deployCertManager } from "./ts/cert-manager";
 
-const mediaKustomize = new k8s.kustomize.Directory("media", {
-  directory: "./media",
+new k8s.kustomize.Directory("media", {
+  directory: "./yml/media",
 });
 
 deployCertManager();
