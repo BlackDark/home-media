@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: radarr
-          image: lscr.io/linuxserver/radarr:4.1.0.6175-ls152
+          image: ghcr.io/linuxserver/radarr:4.1.0.6175-ls152
           ports:
             - name: http
               containerPort: 7878
