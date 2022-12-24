@@ -5,12 +5,13 @@
   },
   packageRules: [
     {
-      allowedVersions: "/^(?<version>v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
+      // extractVersion: "/^(?<version>(\\w+-)v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
+      versioning: "regex:^(?<prerelease>\\w+-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?\\.?(?<build>\\d+)?(-ls\\d+)?$",
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
     },
-    {
-      allowedVersions: "/^(?<version>nightly-v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
-      matchPackagePatterns: ["prowlarr", "readarr"],
-    },
+    // {
+    //   allowedVersions: "/^(?<version>nightly-v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
+    //   matchPackagePatterns: ["prowlarr", "readarr"],
+    // },
   ],
 }
