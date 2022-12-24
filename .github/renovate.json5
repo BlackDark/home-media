@@ -3,4 +3,10 @@
   kubernetes: {
     fileMatch: ["kubernetes/.+\\.ya?ml$"],
   },
+  packageRules: [
+    {
+      allowedVersions: "/^(?<version>v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
+      matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
+    },
+  ],
 }
