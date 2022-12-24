@@ -8,5 +8,9 @@
       allowedVersions: "/^(?<version>v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
     },
+    {
+      allowedVersions: "/^(?<version>nightly-v?\\d+(\\.\\d+){2,4}-ls\\d+)$/",
+      matchPackagePatterns: ["prowlarr", "readarr"],
+    },
   ],
 }
