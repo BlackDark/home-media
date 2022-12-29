@@ -1,6 +1,9 @@
-# Pulumi
+# Kubernetes Resources
 
 ## Setup
 
-- Install pulumi, e.g. via `brew install pulumi`
-- Install the dependencies
+- `brew install kluctl/tap/kluctl`
+
+## TODO
+
+- https://artifacthub.io/packages/helm/mojo2600/pihole

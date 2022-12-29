@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-hole
+spec:
+  selector:
+    matchLabels:
+      app: pi-hole
+  template:
+    metadata:
+      labels:
+        app: pi-hole
+    spec:
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: pi-hole-app-data
+      containers:
+        - name: pi-hole
+          image: pihole/pihole:2022.12
+          ports:
+            - name: http
+              containerPort: 80
+            - name: dns-udp
+              containerPort: 53
+              protocol: UDP
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+          env:
+            - name: TZ
+              value: Europe/Berlin
+            - name: VIRTUAL_HOST
+              value: pi-hole.10.0.0.5.sslip.io
+          volumeMounts:
+            - mountPath: /etc/pihole
+              name: app-data
+              subPath: pihole
+            - mountPath: /etc/dnsmasq.d
+              name: app-data
+              subPath: dnsmasq.d
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-hole
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: pi-hole
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-hole-dns
+  annotations:
+    metallb.universe.tf/address-pool: dns
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+    - port: 53
+      name: udp
+      protocol: UDP
+      targetPort: dns-udp
+    - port: 53
+      name: tcp
+      protocol: TCP
+      targetPort: dns-tcp
+  selector:
+    app: pi-hole
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pi-hole
+spec:
+  rules:
+    - host: pi-hole.10.0.0.5.sslip.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: pi-hole
+                port:
+                  name: http

@@ -1,0 +1,9 @@
+# ports:
+#   web:
+#     # https://docs.traefik.io/routing/entrypoints/#redirection
+#     redirectTo: websecure
+
+#     # Trust forwarded  headers information (X-Forwarded-*).
+#     # forwardedHeaders:
+#     #   trustedIPs: []
+#     #   insecure: false

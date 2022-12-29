@@ -1,26 +1,26 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: media-app-data
+  name: pi-hole-app-data
 spec:
   storageClassName: ""
   capacity:
-    storage: 100Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/apps"
+    path: "/data/apps/pi-hole"
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media-app-data
+  name: pi-hole-app-data
 spec:
   storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: media-app-data
+  volumeName: pi-hole-app-data
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 1Gi

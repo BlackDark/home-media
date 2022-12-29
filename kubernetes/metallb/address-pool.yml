@@ -1,0 +1,19 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: home-server
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.0.0.5/32
+  autoAssign: true
+
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: dns
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.0.0.6/32

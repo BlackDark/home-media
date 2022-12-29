@@ -1,0 +1,10 @@
+deployments:
+  - path: cert-manager
+  - path: default
+  - path: media
+  - path: metallb
+  - path: pi-hole
+  - path: traefik
+
+commonLabels:
+  de.linkvt/stack: home-server

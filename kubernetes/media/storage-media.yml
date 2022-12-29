@@ -3,7 +3,6 @@ kind: PersistentVolume
 metadata:
   name: media-downloads
 spec:
-  storageClassName: ""
   capacity:
     storage: 100Gi
   accessModes:
