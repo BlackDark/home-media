@@ -1,17 +1,23 @@
-http:
+tcp:
   routers:
-    bitwarden:
-      rule: "Host(`bitwarden.{{ base_domain }}`)"
-      service: bitwarden
-    homeassistant:
-      rule: "Host(`home-assistant.{{ base_domain }}`)"
-      service: home-assistant
+    home-http:
+      entryPoints:
+        - web
+      rule: HostSNI(`*`)
+      service: home-http
+    home-https:
+      entryPoints:
+        - websecure
+      rule: HostSNI(`*`)
+      service: home-https
+      tls:
+        passthrough: true
   services:
-    bitwarden:
+    home-http:
       loadBalancer:
         servers:
-          - url: "http://{{ tunnel_ip }}:7277"
-    home-assistant:
+          - address: 100.82.5.47:30080
+    home-https:
       loadBalancer:
         servers:
-          - url: "http://{{ tunnel_ip }}:8122"
+          - address: 100.82.5.47:30443

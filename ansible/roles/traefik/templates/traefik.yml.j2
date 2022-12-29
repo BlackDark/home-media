@@ -1,19 +1,8 @@
 entryPoints:
   web:
     address: :80
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
   websecure:
     address: :443
-    http:
-      tls:
-        certResolver: lets-encrypt
-    forwardedHeaders:
-      trustedIPs:
-        {{ cloudflare_ips | to_nice_yaml | indent(8) }}
 
 accessLog:
   filePath: "{{ traefik_container_log_dir }}/access.log"
@@ -26,12 +15,3 @@ providers:
   file:
     filename: {{ traefik_dynamic_config_file }}
     watch: true
-
-certificatesResolvers:
-  lets-encrypt:
-    acme:
-      email: mail@linkvt.de
-      storage: /etc/traefik/acme.json
-      httpChallenge:
-        # used during the challenge
-        entryPoint: web
