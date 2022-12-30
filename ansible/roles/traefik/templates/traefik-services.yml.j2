@@ -15,9 +15,11 @@ tcp:
   services:
     home-http:
       loadBalancer:
+#        proxyProtocol: {}
         servers:
           - address: 100.82.5.47:30080
     home-https:
       loadBalancer:
+#        proxyProtocol: {}
         servers:
           - address: 100.82.5.47:30443

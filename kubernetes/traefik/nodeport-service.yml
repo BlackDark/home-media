@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: traefik-nodeport
 spec:
+  type: NodePort
+  externalTrafficPolicy: Local
   ports:
     - name: web
       nodePort: 30080
@@ -15,4 +17,3 @@ spec:
   selector:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/name: traefik
-  type: NodePort

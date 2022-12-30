@@ -7,3 +7,4 @@
 ## TODO
 
 - https://artifacthub.io/packages/helm/mojo2600/pihole
+- x forwarded for in traefik
