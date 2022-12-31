@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://charts.goauthentik.io/
+  chartName: authentik
+  chartVersion: 2022.12.0
+  namespace: authentik
+  releaseName: authentik

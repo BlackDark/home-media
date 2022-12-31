@@ -1,0 +1,45 @@
+authentik:
+  error_reporting:
+    enabled: true
+  postgresql:
+    password: 10eff5db345a1255505775be1b0f91d1
+
+envFrom:
+  - secretRef:
+      name: authentik
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+  hosts:
+    - host: authentik.linkvt.de
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+postgresql:
+  enabled: true
+  persistence:
+    existingClaim: authentik-app-data
+    subPath: postgres
+  postgresqlPostgresPassword: 5a1e215ee5178fec9bd7b360b004f3aa
+  postgresqlPassword: 10eff5db345a1255505775be1b0f91d1
+  volumePermissions:
+    enabled: true
+
+redis:
+  enabled: true
+  master:
+    # initContainers:
+    #   - name: fix-volume-permissions
+    #     image: busybox
+    #     command: ["sh", "-ec", "chown -R 1001:1001 /data"]
+    #     volumeMounts:
+    #       - name: redis-data
+    #         mountPath: /data
+    persistence:
+      existingClaim: authentik-app-data
+      subPath: redis
+  volumePermissions:
+    enabled: true

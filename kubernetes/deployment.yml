@@ -1,4 +1,5 @@
 deployments:
+  - path: authentik
   - path: cert-manager
   - path: default
   - path: media
