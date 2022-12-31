@@ -5,5 +5,6 @@ resources:
   - helm-rendered.yaml
   - middleware-authentik.yml
   - namespace.yml
-  - secret-authentik.yml
+  - secret-sealed-authentik.yml
+  - secret-sealed-postgres.yml
   - storage.yml
