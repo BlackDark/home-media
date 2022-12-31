@@ -5,6 +5,7 @@ deployments:
   - path: media
   - path: metallb
   - path: pi-hole
+  - path: sealed-secrets
   - path: traefik
 
 commonLabels:
