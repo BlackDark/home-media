@@ -7,4 +7,4 @@
 ## TODO
 
 - https://artifacthub.io/packages/helm/mojo2600/pihole
-- x forwarded for in traefik
+- changelog provider https://github.com/goauthentik/authentik/releases/tag/version%2F2022.12.1
