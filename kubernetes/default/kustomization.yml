@@ -4,3 +4,4 @@ namespace: default
 resources:
   - service-bitwarden.yml
   - service-home-assistant.yml
+  - whoami.yml
