@@ -1,3 +1,6 @@
+commonLabels:
+  de.linkvt/stack: home-server
+
 deployments:
   - path: authentik
   - path: cert-manager
@@ -8,5 +11,8 @@ deployments:
   - path: sealed-secrets
   - path: traefik
 
-commonLabels:
-  de.linkvt/stack: home-server
+vars:
+  - clusterSecret:
+      name: smtp-credentials
+      namespace: default
+      key: vars
