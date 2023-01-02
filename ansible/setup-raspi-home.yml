@@ -4,7 +4,6 @@
     - tailscale
     - geerlingguy.docker
     - homeassistant
-    - pihole
     - role: caddy
       tags: caddy
     - role: homer
