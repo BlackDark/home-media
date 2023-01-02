@@ -4,6 +4,5 @@ namespace: traefik
 resources:
   - helm-rendered.yaml
   - ingress.yml
-  - middleware-redirect-https.yml
   - namespace.yml
   - nodeport-service.yml
