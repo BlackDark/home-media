@@ -1,5 +1,6 @@
 additionalArguments:
   - --api.insecure=true # required to access via k8s ingress
+  - --entrypoints.web.http.redirections.entryPoint.priority=1000 # reduce prio to allow overwrite for http only (e.g. jellyfin)
 
 deployment:
   replicas: 1

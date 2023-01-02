@@ -51,6 +51,26 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: jellyfin-local
+  annotations:
+    traefik.ingress.kubernetes.io/router.priority: "1001" # overwrite default https redirect
+spec:
+  rules:
+    - host: jellyfin.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  name: http
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: jellyfin-basic
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
