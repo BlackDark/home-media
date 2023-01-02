@@ -38,7 +38,7 @@
 - name: Start the fail2ban container
   docker_container:
     name: fail2ban
-    image: lscr.io/linuxserver/fail2ban:0.11.2-r1-ls5
+    image: lscr.io/linuxserver/fail2ban:1.0.2-r0-ls13
     network_mode: host
     restart: "{{ fail2ban_configuration.changed }}"
     restart_policy: unless-stopped
