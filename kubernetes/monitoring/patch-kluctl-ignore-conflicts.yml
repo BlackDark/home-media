@@ -1,0 +1,6 @@
+apiVersion: ignored
+kind: ignored
+metadata:
+  name: ignored
+  annotations:
+    kluctl.io/ignore-conflicts: "true"

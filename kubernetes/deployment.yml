@@ -7,6 +7,7 @@ deployments:
   - path: default
   - path: media
   - path: metallb
+  - path: monitoring
   - path: pi-hole
   - path: sealed-secrets
   - path: traefik

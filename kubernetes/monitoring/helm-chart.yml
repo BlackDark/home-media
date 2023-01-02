@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://prometheus-community.github.io/helm-charts
+  chartName: kube-prometheus-stack
+  chartVersion: 43.2.1
+  namespace: monitoring
+  releaseName: kube-prometheus

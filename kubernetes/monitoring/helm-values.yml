@@ -1,0 +1,76 @@
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+    hosts:
+      - alertmanager.linkvt.de
+    tls:
+      - secretName: alertmanager-certificate
+        hosts:
+          - alertmanager.linkvt.de
+  config:
+    global:
+      smtp_auth_password: "{{ smtp.password }}"
+      smtp_auth_username: "{{ smtp.username }}"
+      smtp_from: "Alertmanager <alertmanager@linkvt.de>"
+      smtp_smarthost: "{{ smtp.host }}:{{ smtp.port }}"
+    receivers:
+      - name: "null"
+      - name: mail
+        email_configs:
+          - to: mail@linkvt.de
+            send_resolved: true
+    route:
+      receiver: "mail"
+      routes:
+        - matchers:
+            - alertname =~ "InfoInhibitor|Watchdog"
+          receiver: "null"
+
+defaultRules:
+  rules:
+    # not working with microk8s
+    kubeControllerManager: false
+    kubeProxy: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerReporting: false
+
+grafana:
+  grafana.ini:
+    # auth.jwt:
+    #   enabled: true
+    #   header_name: X-Authentik-Jwt
+    #   username_claim: preferred_username
+    #   email_claim: email
+    auth.proxy:
+      enabled: true
+      auto_sign_up: true
+      header_name: X-Authentik-Username
+      headers: "Email:X-Authentik-Email Name:X-Authentik-Name"
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+    hosts:
+      - grafana.linkvt.de
+    tls:
+      - secretName: grafana-certificate
+        hosts:
+          - grafana.linkvt.de
+
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+    hosts:
+      - prometheus.linkvt.de
+    tls:
+      - secretName: prometheus-certificate
+        hosts:
+          - prometheus.linkvt.de
