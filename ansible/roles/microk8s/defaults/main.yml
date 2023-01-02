@@ -4,7 +4,6 @@ microk8s_users:
 microk8s_addons:
   - community
   - dns
-  - argocd
   - metrics-server
 
 microk8s_addons_disabled: []
