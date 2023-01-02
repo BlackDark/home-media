@@ -7,4 +7,9 @@ resources:
 patches:
   - path: patch-kluctl-ignore-conflicts.yml
     target:
+      kind: MutatingWebhookConfiguration
+      name: kube-prometheus-kube-prome-admission
+  - path: patch-kluctl-ignore-conflicts.yml
+    target:
+      kind: ValidatingWebhookConfiguration
       name: kube-prometheus-kube-prome-admission
