@@ -15,12 +15,16 @@ envValueFrom:
 ingress:
   enabled: true
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt
   hosts:
     - host: authentik.linkvt.de
       paths:
         - path: "/"
           pathType: Prefix
+  tls:
+    - hosts:
+        - authentik.linkvt.de
+      secretName: authentik-certificate
 
 postgresql:
   enabled: true

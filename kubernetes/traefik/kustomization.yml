@@ -3,8 +3,7 @@ kind: Kustomization
 namespace: traefik
 resources:
   - helm-rendered.yaml
+  - ingress.yml
   - middleware-redirect-https.yml
   - namespace.yml
   - nodeport-service.yml
-patches:
-  - path: patch-service.yml

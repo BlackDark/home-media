@@ -52,9 +52,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: readarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: readarr.10.0.0.5.sslip.io
+    - host: readarr.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -64,3 +67,7 @@ spec:
                 name: readarr
                 port:
                   name: http
+  tls:
+    - hosts:
+        - readarr.linkvt.de
+      secretName: readarr-certificate

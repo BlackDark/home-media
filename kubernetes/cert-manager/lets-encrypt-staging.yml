@@ -11,3 +11,8 @@ spec:
     solvers:
       - http01:
           ingress: {}
+      # - dns01:
+      #     cloudflare:
+      #       apiTokenSecretRef:
+      #         name: cloudflare-api-token
+      #         key: api-token

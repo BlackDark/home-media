@@ -47,9 +47,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: prowlarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: prowlarr.10.0.0.5.sslip.io
+    - host: prowlarr.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -59,3 +62,7 @@ spec:
                 name: prowlarr
                 port:
                   name: http
+  tls:
+    - hosts:
+        - prowlarr.linkvt.de
+      secretName: prowlarr-certificate

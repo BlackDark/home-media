@@ -37,8 +37,8 @@ kind: Ingress
 metadata:
   name: whoami
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
-    # traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
 spec:
   rules:
     - host: whoami.linkvt.de
@@ -51,3 +51,7 @@ spec:
                 name: whoami
                 port:
                   name: http
+  tls:
+    - hosts:
+        - whoami.linkvt.de
+      secretName: whoami-certificate

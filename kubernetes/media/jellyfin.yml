@@ -51,10 +51,13 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jellyfin
+  name: jellyfin-basic
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: jellyfin.10.0.0.5.sslip.io
+    - host: jellyfin-basic.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -64,3 +67,32 @@ spec:
                 name: jellyfin
                 port:
                   name: http
+  tls:
+    - hosts:
+        - jellyfin-basic.linkvt.de
+      secretName: jellyfin-basic-certificate
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+spec:
+  rules:
+    - host: jellyfin.linkvt.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - jellyfin.linkvt.de
+      secretName: jellyfin-certificate

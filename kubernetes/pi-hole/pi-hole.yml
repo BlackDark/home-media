@@ -31,7 +31,7 @@ spec:
             - name: TZ
               value: Europe/Berlin
             - name: VIRTUAL_HOST
-              value: pi-hole.10.0.0.5.sslip.io
+              value: pi-hole.linkvt.de
           volumeMounts:
             - mountPath: /etc/pihole
               name: app-data
@@ -80,9 +80,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pi-hole
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: pi-hole.10.0.0.5.sslip.io
+    - host: pi-hole.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -92,3 +95,7 @@ spec:
                 name: pi-hole
                 port:
                   name: http
+  tls:
+    - hosts:
+        - pi-hole.linkvt.de
+      secretName: pi-hole-certificate

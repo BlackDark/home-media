@@ -27,7 +27,7 @@ kind: Ingress
 metadata:
   name: bitwarden
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
     - host: bitwarden.linkvt.de
@@ -40,3 +40,7 @@ spec:
                 name: bitwarden
                 port:
                   name: http
+  tls:
+    - hosts:
+        - bitwarden.linkvt.de
+      secretName: bitwarden-certificate

@@ -55,10 +55,13 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sabnzbd
+  name: sabnzbd-basic
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: sabnzbd.10.0.0.5.sslip.io
+    - host: sabnzbd-basic.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -68,3 +71,32 @@ spec:
                 name: sabnzbd
                 port:
                   name: http
+  tls:
+    - hosts:
+        - sabnzbd-basic.linkvt.de
+      secretName: sabnzbd-basic-certificate
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sabnzbd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+spec:
+  rules:
+    - host: sabnzbd.linkvt.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: sabnzbd
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - sabnzbd.linkvt.de
+      secretName: sabnzbd-certificate

@@ -6,12 +6,14 @@ resources:
   - jackett.yml
   - jellyfin.yml
   - lidarr.yml
+  - middleware-basic-auth.yml
   - namespace.yml
   - prowlarr.yml
   - radarr.yml
   - readarr.yml
   - sabnzbd.yml
   - samba.yml
+  - secret-sealed-basic-auth.yml
   - sonarr.yml
   - storage-app.yml
   - storage-media.yml

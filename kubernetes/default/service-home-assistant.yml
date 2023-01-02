@@ -27,7 +27,7 @@ kind: Ingress
 metadata:
   name: home-assistant
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
     - host: home-assistant.linkvt.de
@@ -40,3 +40,7 @@ spec:
                 name: home-assistant
                 port:
                   name: http
+  tls:
+    - hosts:
+        - home-assistant.linkvt.de
+      secretName: home-assistant-certificate
