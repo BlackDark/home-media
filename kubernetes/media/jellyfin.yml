@@ -56,7 +56,17 @@ metadata:
     traefik.ingress.kubernetes.io/router.priority: "1001" # overwrite default https redirect
 spec:
   rules:
-    - host: jellyfin.local
+    - host: jellyfin.fritz.box
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  name: http
+    - host: jellyfin.10.0.0.5.sslip.io
       http:
         paths:
           - pathType: Prefix
