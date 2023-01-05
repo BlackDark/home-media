@@ -7,6 +7,6 @@
     "dependencies": {
         "@pulumi/cloudflare": "^4.9.0",
         "@pulumi/oci": "^0.5.0",
-        "@pulumi/pulumi": "3.50.2"
+        "@pulumi/pulumi": "3.51.0"
     }
 }
