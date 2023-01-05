@@ -8,10 +8,6 @@
       versioning: "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(\\.|-)?(?<build>\\w?\\d+)?-ls\\d+$",
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
     },
-    {
-      customChangelogUrl: "https://github.com/goauthentik/authentik",
-      matchPackageNames: ["authentik"],
-    },
   ],
   regexManagers: [
     {
