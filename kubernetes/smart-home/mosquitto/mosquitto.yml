@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+spec:
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          args:
+            - "/usr/sbin/mosquitto"
+            - "-c"
+            - "/app/mosquitto.conf"
+          image: eclipse-mosquitto:2.0.11
+          ports:
+            - name: http
+              containerPort: 9001
+            - name: mqtt
+              containerPort: 1883
+          volumeMounts:
+            - mountPath: /mosquitto/config
+              name: app-data
+              subPath: config
+            - mountPath: /app/mosquitto.conf
+              name: mosquitto-conf
+              subPath: mosquitto.conf
+            - mountPath: /mosquitto/data
+              name: app-data
+              subPath: data
+            - mountPath: /mosquitto/log
+              name: app-data
+              subPath: log
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: mosquitto-app-data
+        - name: mosquitto-conf
+          configMap:
+            name: mosquitto-conf
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+    - port: 1883
+      name: mqtt
+      targetPort: mqtt
+  selector:
+    app: mosquitto
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-lb
+  annotations:
+    metallb.universe.tf/allow-shared-ip: main
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 1883
+      name: mqtt
+      targetPort: mqtt
+  selector:
+    app: mosquitto
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: mosquitto
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt
+#     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+# spec:
+#   rules:
+#     - host: mosquitto.linkvt.de
+#       http:
+#         paths:
+#           - pathType: Prefix
+#             path: /
+#             backend:
+#               service:
+#                 name: mosquitto
+#                 port:
+#                   name: http
+#   tls:
+#     - hosts:
+#         - mosquitto.linkvt.de
+#       secretName: mosquitto-certificate
