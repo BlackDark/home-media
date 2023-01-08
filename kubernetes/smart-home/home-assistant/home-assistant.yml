@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+spec:
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      # hostNetwork: true # enable for home assistant discovery
+      containers:
+        - name: home-assistant
+          image: ghcr.io/home-assistant/home-assistant:2023.1.1
+          ports:
+            - name: http
+              containerPort: 8123
+          env:
+            - name: TZ
+              value: Europe/Berlin
+          volumeMounts:
+            - name: app-data
+              mountPath: /config
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: home-assistant-app-data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: home-assistant
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: home-assistant
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+spec:
+  rules:
+    - host: home-assistant.linkvt.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - home-assistant.linkvt.de
+      secretName: home-assistant-certificate

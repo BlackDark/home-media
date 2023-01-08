@@ -30,7 +30,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-    - host: home-assistant.linkvt.de
+    - host: home-assistant-old.linkvt.de
       http:
         paths:
           - pathType: Prefix
@@ -42,5 +42,5 @@ spec:
                   name: http
   tls:
     - hosts:
-        - home-assistant.linkvt.de
+        - home-assistant-old.linkvt.de
       secretName: home-assistant-certificate
