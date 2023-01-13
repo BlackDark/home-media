@@ -3,6 +3,7 @@ commonLabels:
 
 deployments:
   - path: authentik
+  - path: bitwarden
   - path: cert-manager
   - path: default
   - path: media

@@ -30,7 +30,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-    - host: bitwarden.linkvt.de
+    - host: bitwarden-old.linkvt.de
       http:
         paths:
           - pathType: Prefix
