@@ -5,4 +5,5 @@ resources:
   - namespace.yml
   - home-assistant/
   - mosquitto/
+  - node-red/
   - zigbee2mqtt/
