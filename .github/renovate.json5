@@ -1,5 +1,5 @@
 {
-  extends: ["github>linkvt/renovate-base", "schedule:daily"],
+  extends: ["github>linkvt/renovate-base"],
   kubernetes: {
     fileMatch: ["kubernetes/.+\\.ya?ml$"],
   },
@@ -21,4 +21,5 @@
       ],
     },
   ],
+  schedule: ["at any time"],
 }
