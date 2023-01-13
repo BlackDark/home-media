@@ -1,5 +1,5 @@
 {
-  extends: ["github>linkvt/renovate-base", "schedule:weekly"],
+  extends: ["github>linkvt/renovate-base", "schedule:daily"],
   kubernetes: {
     fileMatch: ["kubernetes/.+\\.ya?ml$"],
   },
