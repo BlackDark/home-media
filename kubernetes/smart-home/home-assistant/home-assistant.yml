@@ -49,7 +49,6 @@ metadata:
   name: home-assistant
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
     - host: home-assistant.linkvt.de
