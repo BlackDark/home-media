@@ -1,0 +1,25 @@
+name: Kubernetes
+
+on:
+  push:
+    paths:
+      - kubernetes/**
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: kubernetes
+
+jobs:
+  kubernetes:
+    name: kubernetes
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/kluctl/kluctl:v2.18.4
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Render kluctl resources
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}"
+        run: kluctl render --offline-kubernetes
