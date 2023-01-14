@@ -3,6 +3,8 @@
 ## Setup
 
 - `brew install kluctl/tap/kluctl`
+- `brew install sops`
+- `brew install age`
 
 ## TODO
 

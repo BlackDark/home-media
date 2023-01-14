@@ -13,7 +13,7 @@ resources:
   - readarr.yml
   - sabnzbd.yml
   - samba.yml
-  - secret-sealed-basic-auth.yml
+  - secret-media-basic-auth.yml
   - sonarr.yml
   - storage-app.yml
   - storage-media.yml
