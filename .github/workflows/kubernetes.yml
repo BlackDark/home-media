@@ -22,7 +22,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Render kluctl resources
+      - name: Install sops
+        uses: mdgreenwald/mozilla-sops-action@v1.4.1
+
+      - name: Decrypt SOPS secrets # kluctl decrypt is flaky and doesn't work sometimes
         env:
-          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}"
-        run: kluctl render --offline-kubernetes
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: sops -d -i secrets.yml
+
+      - name: Render kluctl resources
+        run: kluctl render --offline-kubernetes --kubernetes-version v1.99.0
