@@ -6,8 +6,6 @@ deployments:
   - path: bitwarden
   - path: cert-manager
   - path: default
-  - path: flux-kluctl-controller
-  - path: fluxcd
   - path: media
   - path: metallb
   - path: monitoring
