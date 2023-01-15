@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: jackett
-          image: ghcr.io/linuxserver/jackett:v0.20.2620-ls88
+          image: ghcr.io/linuxserver/jackett:v0.20.2640-ls88
           ports:
             - name: http
               containerPort: 9117
