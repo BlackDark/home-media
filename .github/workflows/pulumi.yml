@@ -1,6 +1,9 @@
 name: Pulumi
 
 on:
+  pull_request:
+    paths:
+      - pulumi/**
   push:
     paths:
       - pulumi/**

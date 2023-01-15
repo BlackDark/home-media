@@ -1,6 +1,9 @@
 name: Ansible
 
 on:
+  pull_request:
+    paths:
+      - ansible/**
   push:
     paths:
       - ansible/**
