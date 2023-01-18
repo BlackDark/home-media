@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://kluctl.github.io/charts
+  chartName: flux-kluctl-controller
+  chartVersion: 0.2.4
+  namespace: flux-kluctl-controller
+  releaseName: flux-kluctl-controller

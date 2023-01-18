@@ -1,0 +1,18 @@
+apiVersion: flux.kluctl.io/v1alpha1
+kind: KluctlDeployment
+metadata:
+  name: infrastructure
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-keys
+  # dryRun: true
+  interval: 5m
+  prune: true
+  source:
+    url: https://github.com/linkvt/infrastructure.git
+    path: "./kubernetes"
+    secretRef:
+      name: infrastructure-git-credentials
+  timeout: 15m
