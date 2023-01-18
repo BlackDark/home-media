@@ -7,4 +7,5 @@ resources:
 patches:
   - path: add-cache-mount.yml
     target:
+      kind: Deployment
       name: flux-kluctl-controller # workaround as kluctl ... --offline... fails with a normal patch
