@@ -17,7 +17,7 @@ spec:
             claimName: pi-hole-app-data
       containers:
         - name: pi-hole
-          image: pihole/pihole:2022.12
+          image: pihole/pihole:2023.01
           ports:
             - name: http
               containerPort: 80
