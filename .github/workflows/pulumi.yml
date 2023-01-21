@@ -27,7 +27,7 @@ jobs:
       - run: npm install
 
       - name: pulumi preview
-        uses: pulumi/actions@v3
+        uses: pulumi/actions@v4
         with:
           command: preview
           stack-name: prod
@@ -37,7 +37,7 @@ jobs:
 
       - name: pulumi up
         if: github.ref == 'refs/heads/main'
-        uses: pulumi/actions@v3
+        uses: pulumi/actions@v4
         with:
           command: up
           stack-name: prod
