@@ -6,6 +6,8 @@ spec:
   selector:
     matchLabels:
       app: zigbee2mqtt
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:

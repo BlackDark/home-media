@@ -7,3 +7,7 @@ configMapGenerator:
   - name: mosquitto-conf
     files:
       - mosquitto.conf
+secretGenerator:
+  - name: mosquitto-password-file
+    files:
+      - password_file

@@ -11,6 +11,21 @@ spec:
       labels:
         app: mosquitto
     spec:
+      initContainers:
+        - name: prepare-password-file
+          image: eclipse-mosquitto:2.0.15
+          command: ["sh", "-c"]
+          args:
+            - set -ex;
+              cp /config/password_file /mosquitto/config/;
+              chown 1883:1883 /mosquitto/config/password_file;
+              mosquitto_passwd -U /mosquitto/config/password_file;
+          volumeMounts:
+            - mountPath: /mosquitto/config
+              name: app-data
+              subPath: config
+            - mountPath: /config/
+              name: mosquitto-password-file
       containers:
         - name: mosquitto
           args:
@@ -43,6 +58,9 @@ spec:
         - name: mosquitto-conf
           configMap:
             name: mosquitto-conf
+        - name: mosquitto-password-file
+          secret:
+            secretName: mosquitto-password-file
 
 ---
 apiVersion: v1

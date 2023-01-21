@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: secrets.yml
+  - path_regex: (secrets.yml|password_file)
     key_groups:
       - age:
           - age1gznk0mzy2qse7sst2mauura0uj0at2pmg9rp2vudfxgu5jjp2gesekp76k # @linkvt
