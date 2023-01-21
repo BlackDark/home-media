@@ -8,6 +8,7 @@ deployments:
   - path: default
   - path: flux-kluctl-controller
   - path: fluxcd
+  - path: kube-system
   - path: media
   - path: metallb
   - path: monitoring
