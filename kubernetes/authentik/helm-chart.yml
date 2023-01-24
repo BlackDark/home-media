@@ -1,6 +1,6 @@
 helmChart:
   repo: https://charts.goauthentik.io/
   chartName: authentik
-  chartVersion: 2022.12.4
+  chartVersion: 2023.1.2
   namespace: authentik
   releaseName: authentik
