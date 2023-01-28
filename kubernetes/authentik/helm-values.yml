@@ -35,6 +35,12 @@ postgresql:
   volumePermissions:
     enabled: true
 
+prometheus:
+  rules:
+    create: true
+  serviceMonitor:
+    create: true
+
 redis:
   enabled: true
   master:
