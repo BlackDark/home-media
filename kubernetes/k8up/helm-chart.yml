@@ -1,6 +1,6 @@
 helmChart:
   repo: https://k8up-io.github.io/k8up
   chartName: k8up
-  chartVersion: 4.0.0
+  chartVersion: 4.0.1
   namespace: k8up-operator
   releaseName: k8up
