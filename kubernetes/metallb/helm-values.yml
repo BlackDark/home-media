@@ -1,0 +1,7 @@
+prometheus:
+  namespace: monitoring
+  podMonitor:
+    enabled: true
+  prometheusRule:
+    enabled: true
+  serviceAccount: kube-prometheus-kube-prome-prometheus
