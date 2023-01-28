@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://charts.appuio.ch
+  chartName: k8up
+  chartVersion: 2.0.5
+  namespace: k8up-operator
+  releaseName: k8up
