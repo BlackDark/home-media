@@ -5,12 +5,16 @@
   },
   packageRules: [
     {
-      versioning: "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(\\.|-)?(?<build>\\w?\\d+)?-ls\\d+$",
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
+      versioning: "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(\\.|-)?(?<build>\\w?\\d+)?-ls\\d+$",
     },
     {
       matchPaths: ["kubernetes/**"],
       schedule: ["at any time"],
+    },
+    {
+      matchDepNames: ["k8up-io/k8up"],
+      versioning: "regex:^\\w+-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
   ],
   regexManagers: [
@@ -25,10 +29,10 @@
       ],
     },
     {
-      datasourceTemplate: "github-tags",
+      datasourceTemplate: "github-releases",
       fileMatch: ["kustomization\\.ya?ml$"],
       matchStrings: [
-        "(?<registryUrl>[^\\/]*)\\/(?<depName>[^\\/]*\\/[^\\/]*)\\/releases\\/download\\/(?<currentValue>[^\\/]*)",
+        "github\\.com\\/(?<depName>[^\\/]*\\/[^\\/]*)\\/releases\\/download\\/(?<currentValue>[^\\/]*)",
       ],
     },
   ],
