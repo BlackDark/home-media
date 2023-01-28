@@ -6,3 +6,4 @@ resources:
   - lets-encrypt-production.yml
   - lets-encrypt-staging.yml
   - namespace.yml
+  - prometheus-alerts.yml
