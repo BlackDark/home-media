@@ -74,3 +74,9 @@ prometheus:
       - secretName: prometheus-certificate
         hosts:
           - prometheus.linkvt.de
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
