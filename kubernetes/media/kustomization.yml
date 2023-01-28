@@ -4,6 +4,7 @@ namespace: media
 resources:
   - config.yml
   - jellyfin.yml
+  - jellyseerr.yml
   - lidarr.yml
   - middleware-basic-auth.yml
   - namespace.yml
