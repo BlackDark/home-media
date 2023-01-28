@@ -15,9 +15,6 @@ spec:
         - name: app-data
           persistentVolumeClaim:
             claimName: media-app-data
-        # - name: media
-        #   persistentVolumeClaim:
-        #     claimName: media-downloads
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:1.3.0
@@ -31,8 +28,6 @@ spec:
             - mountPath: /app/config
               name: app-data
               subPath: jellyseerr
-            # - mountPath: /data
-            #   name: media
 
 ---
 apiVersion: v1
