@@ -9,7 +9,7 @@ spec:
       name: sops-keys
   # dryRun: true
   interval: 15m
-  prune: true
+  # prune: true
   source:
     url: https://github.com/linkvt/infrastructure.git
     path: "./kubernetes"
