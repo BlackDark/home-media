@@ -24,5 +24,12 @@
         "chartVersion:\\s+(?<currentValue>.*)",
       ],
     },
+    {
+      datasourceTemplate: "github-tags",
+      fileMatch: ["kustomization\\.ya?ml$"],
+      matchStrings: [
+        "(?<registryUrl>[^\\/]*)\\/(?<depName>[^\\/]*\\/[^\\/]*)\\/releases\\/download\\/(?<currentValue>[^\\/]*)",
+      ],
+    },
   ],
 }
