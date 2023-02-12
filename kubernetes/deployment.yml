@@ -15,6 +15,7 @@ deployments:
   - path: monitoring
   - path: pi-hole
   - path: smart-home
+  - path: share
   - path: traefik
 
 vars:
