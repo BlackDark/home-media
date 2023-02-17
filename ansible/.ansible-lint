@@ -1,5 +1,8 @@
 skip_list:
+  - fqcn[action]
   - fqcn-builtins
   - name[casing]
+  - name[play]
   - name[template]
   - package-latest
+  - role-name
