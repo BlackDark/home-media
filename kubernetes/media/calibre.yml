@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+spec:
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: media-app-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+      containers:
+        - name: calibre
+          image: ghcr.io/linuxserver/calibre:v6.13.0-ls203
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /config
+              name: app-data
+              subPath: calibre
+            - mountPath: /books
+              name: media
+              subPath: all/books
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calibre
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    app: calibre
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: calibre
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
+spec:
+  rules:
+    - host: calibre-desktop.linkvt.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: calibre
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - calibre-desktop.linkvt.de
+      secretName: calibre-certificate
