@@ -3,9 +3,11 @@ name: Pulumi
 on:
   pull_request:
     paths:
+      - .github/workflows/pulumi.yml
       - pulumi/**
   push:
     paths:
+      - .github/workflows/pulumi.yml
       - pulumi/**
   workflow_dispatch:
 

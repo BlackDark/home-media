@@ -3,9 +3,11 @@ name: Ansible
 on:
   pull_request:
     paths:
+      - .github/workflows/ansible.yml
       - ansible/**
   push:
     paths:
+      - .github/workflows/ansible.yml
       - ansible/**
   workflow_dispatch:
 

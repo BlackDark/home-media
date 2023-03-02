@@ -3,9 +3,11 @@ name: Kubernetes
 on:
   pull_request:
     paths:
+      - .github/workflows/kubernetes.yml
       - kubernetes/**
   push:
     paths:
+      - .github/workflows/kubernetes.yml
       - kubernetes/**
   workflow_dispatch:
 
