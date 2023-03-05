@@ -3,6 +3,7 @@
   kubernetes: {
     fileMatch: ["kubernetes/.+\\.ya?ml$"],
   },
+  ignorePaths: ["kubernetes/.helm-charts"],
   packageRules: [
     {
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
