@@ -32,8 +32,5 @@ jobs:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: sops -d -i secrets.yml
 
-      - name: Pull helm charts
-        run: kluctl helm-pull
-
       - name: Render kluctl resources
         run: kluctl render --offline-kubernetes --kubernetes-version v1.99.0

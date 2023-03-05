@@ -1,0 +1,27 @@
+name: Renovate
+
+on:
+  push:
+    branches:
+      - "renovate/**"
+  workflow_dispatch:
+
+jobs:
+  pull-helm-charts:
+    name: Pull Helm Charts
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/kluctl/kluctl:v2.19.2
+    defaults:
+      run:
+        working-directory: kubernetes
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Pull helm charts
+        run: kluctl helm-pull
+
+      - name: Commit and push changes
+        run: |
+          git commit --all --amend --no-edit
+          git push --force
