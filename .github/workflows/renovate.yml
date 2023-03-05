@@ -1,9 +1,11 @@
-name: Renovate
+name: kluctl Helm Charts
 
 on:
   push:
     branches:
-      - "renovate/**"
+      - "renovate/kluctl-**"
+    paths:
+      - .github/workflows/renovate.yml
   workflow_dispatch:
 
 jobs:
@@ -21,7 +23,60 @@ jobs:
       - name: Pull helm charts
         run: kluctl helm-pull
 
-      - name: Commit and push changes
+      - name: Store updated helm charts
+        uses: actions/upload-artifact@v3
+        with:
+          name: helm-charts
+          path: kubernetes/.helm-charts
+          if-no-files-found: error
+
+  push-changes:
+    name: Push Changes
+    needs: pull-helm-charts
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kubernetes
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.KLUCTL_GIT_TOKEN }}
+
+      - name: Delete old .helm-charts directory
+        run: rm -rf .helm-charts
+
+      - name: Download updated helm charts artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: helm-charts
+          path: kubernetes/.helm-charts
+
+      - name: Check for changes
+        id: diff
         run: |
-          git commit --all --amend --no-edit
+          CHANGES=false
+          if [ -n "$(git status --porcelain)" ]; then
+            CHANGES=true
+          else
+            CHANGES=false
+          fi
+          echo "changes=$CHANGES" >> $GITHUB_OUTPUT
+          echo "Files have changed: $CHANGES"
+
+      - name: Commit and push changes
+        if: steps.diff.outputs.changes  == 'true'
+        run: |
+          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          git status
+          git add .
+          git status
+          git commit --amend --no-edit
+          # git commit --all -m "chore: update prepulled helm charts"
           git push --force
+
+      - uses: geekyeggo/delete-artifact@v2
+        if: always()
+        with:
+          name: helm-charts
