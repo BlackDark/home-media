@@ -4,3 +4,4 @@ helmChart:
   chartVersion: 4.1.0
   namespace: k8up-operator
   releaseName: k8up
+  skipPrePull: true

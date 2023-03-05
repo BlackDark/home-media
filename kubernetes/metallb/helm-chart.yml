@@ -4,3 +4,4 @@ helmChart:
   chartVersion: 0.13.9
   namespace: metallb
   releaseName: metallb
+  skipPrePull: true

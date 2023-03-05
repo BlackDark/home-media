@@ -4,3 +4,4 @@ helmChart:
   chartVersion: 2.6.0
   namespace: flux-system
   releaseName: flux
+  skipPrePull: true
