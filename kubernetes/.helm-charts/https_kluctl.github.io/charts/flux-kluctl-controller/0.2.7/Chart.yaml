@@ -1,0 +1,13 @@
+apiVersion: v2
+appVersion: v0.14.1
+description: A Helm chart for the flux-kluctl-controller
+maintainers:
+- name: kluctl
+  url: https://github.com/kluctl/charts
+- email: aljoscha.poertner@posteo.de
+  name: AljoschaP
+- email: ablock84@gmail.com
+  name: codablock
+name: flux-kluctl-controller
+type: application
+version: 0.2.7

@@ -4,4 +4,3 @@ helmChart:
   chartVersion: v1.11.0
   namespace: cert-manager
   releaseName: cert-manager
-  skipPrePull: true
