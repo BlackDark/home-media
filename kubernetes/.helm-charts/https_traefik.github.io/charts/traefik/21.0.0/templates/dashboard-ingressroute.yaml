@@ -24,13 +24,10 @@ spec:
     services:
     - name: api@internal
       kind: TraefikService
-    {{- with .Values.ingressRoute.dashboard.middlewares }}
+    {{- if .Values.ingressRoute.dashboard.middlewares }}
     middlewares:
+      {{- with .Values.ingressRoute.dashboard.middlewares }}
       {{- toYaml . | nindent 6 }}
+      {{- end }}
     {{- end -}}
-
-  {{- with .Values.ingressRoute.dashboard.tls }}
-  tls:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 {{- end -}}

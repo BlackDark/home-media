@@ -1,0 +1,36 @@
+annotations:
+  artifacthub.io/changes: "- \"\U0001F4A5 New release with BREAKING changes\"\n- \"Configure
+    Renovate (#783)\"\n- \":bug: Disabling dashboard ingressroute should delete it
+    (#785)\"\n- \":boom: Rename image.name => image.repository (#784)\"\n- \":necktie:
+    Improve labels settings behavior on metrics providers (#774)\"\n- \"✨ Chart.yaml
+    - add kubeVersion: '>=1.16.0-0'\"\n- \"fix: allowExternalNameServices for kubernetes
+    ingress when hub enabled (#772)\"\n- \"\U0001F648 Add a setting disable API check
+    on Prometheus Operator (#769)\"\n- \"\U0001F4DD Improve documentation on entrypoint
+    options\"\n- \"fix(service-metrics): invert prometheus svc & fullname length checking\"\n"
+apiVersion: v2
+appVersion: v2.9.6
+description: A Traefik based Kubernetes ingress controller
+home: https://traefik.io/
+icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
+keywords:
+- traefik
+- ingress
+- networking
+kubeVersion: '>=1.16.0-0'
+maintainers:
+- email: emile@vauge.com
+  name: emilevauge
+- email: daniel.tomcej@gmail.com
+  name: dtomcej
+- email: ldez@traefik.io
+  name: ldez
+- email: michel.loiseleur@traefik.io
+  name: mloiseleur
+- email: charlie.haley@traefik.io
+  name: charlie-haley
+name: traefik
+sources:
+- https://github.com/traefik/traefik
+- https://github.com/traefik/traefik-helm-chart
+type: application
+version: 21.0.0
