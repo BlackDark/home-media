@@ -1,6 +1,9 @@
 name: kluctl Helm Charts
 
 on:
+  pull_request:
+    branches:
+      - "renovate/kluctl-**"
   push:
     branches:
       - "renovate/kluctl-**"
