@@ -3,7 +3,7 @@ name: kluctl Helm Charts
 on:
   push:
     branches:
-      - renovate/kluctl-**
+      - "renovate/kluctl-**"
     paths:
       - .github/workflows/renovate.yml
   workflow_dispatch:
