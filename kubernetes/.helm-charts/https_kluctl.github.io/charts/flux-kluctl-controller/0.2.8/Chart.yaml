@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: v0.14.1
+appVersion: v0.15.0
 description: A Helm chart for the flux-kluctl-controller
 maintainers:
 - name: kluctl
@@ -10,4 +10,4 @@ maintainers:
   name: codablock
 name: flux-kluctl-controller
 type: application
-version: 0.2.7
+version: 0.2.8
