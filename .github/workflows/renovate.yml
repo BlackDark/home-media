@@ -5,8 +5,6 @@ on:
     branches:
       - "renovate/kluctl-**"
   push:
-    branches:
-      - "renovate/kluctl-**"
     paths:
       - .github/workflows/renovate.yml
   workflow_dispatch:
