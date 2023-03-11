@@ -4,3 +4,4 @@ helmChart:
   chartVersion: 45.5.0
   namespace: monitoring
   releaseName: kube-prometheus
+  skipPrePull: true

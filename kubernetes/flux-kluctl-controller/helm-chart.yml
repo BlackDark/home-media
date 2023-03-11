@@ -4,3 +4,4 @@ helmChart:
   chartVersion: 0.2.8
   namespace: flux-kluctl-controller
   releaseName: flux-kluctl-controller
+  skipPrePull: true
