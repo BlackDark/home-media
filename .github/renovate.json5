@@ -17,10 +17,6 @@
       matchDepNames: ["k8up-io/k8up"],
       versioning: "regex:^\\w+-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
-    {
-      matchPaths: ["**/helm-chart.yml", "**/helm-chart.yaml"],
-      additionalBranchPrefix: "kluctl-",
-    },
   ],
   regexManagers: [
     {
