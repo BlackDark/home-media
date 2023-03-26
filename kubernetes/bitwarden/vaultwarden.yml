@@ -20,7 +20,7 @@ spec:
       #         mountPath: /data
       containers:
         - name: vaultwarden
-          image: vaultwarden/server:1.27.0-alpine
+          image: vaultwarden/server:1.28.0-alpine
           ports:
             - name: http
               containerPort: 80
