@@ -1,7 +1,7 @@
 helmChart:
   repo: https://traefik.github.io/charts
   chartName: traefik
-  chartVersion: 21.2.0
+  chartVersion: 21.2.1
   namespace: traefik
   releaseName: traefik
   skipPrePull: true
