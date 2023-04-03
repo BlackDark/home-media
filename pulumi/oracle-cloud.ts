@@ -1,11 +1,11 @@
 import * as oci from "@pulumi/oci";
-import * as pulumi from "@pulumi/pulumi";
+import { Config } from "@pulumi/pulumi";
 
 // https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/core_security_list#protocol
 const ICMP_PROTOCOL_ID = "1";
 const TCP_PROTOCOL_ID = "6";
 
-const config = new pulumi.Config();
+const config = new Config();
 const SHAPE_NAME = config.require("oracleShapeName");
 const IMAGE_NAME = config.require("oracleImageName");
 const AVAILABILITY_DOMAIN_NAME = config.require("oracleAvailabilityDomainName");

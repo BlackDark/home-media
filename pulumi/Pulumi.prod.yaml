@@ -1,6 +1,8 @@
 config:
   cloudflare:apiToken:
     secure: AAABAJrTVRTimdazCwvoaeLpNdANgx35LVfb5HcDnhwI+5w1CV88GOafFz9AJffJv7uap/FxZBcvSHz3ZuejXd0HSwDIR29L
+  infrastructure:cloudflareAccountId:
+    secure: AAABAAU6JNRiiOSkzIF6VkeoAGNcTY0Ynp1uOmGlmQ8=
   infrastructure:oracleAvailabilityDomainName: Bbof:EU-FRANKFURT-1-AD-3
   infrastructure:oracleImageName: Canonical-Ubuntu-22.04-aarch64-2022.11.06-0
   infrastructure:oracleShapeName: VM.Standard.A1.Flex
