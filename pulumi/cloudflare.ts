@@ -1,7 +1,10 @@
 import * as cloudflare from "@pulumi/cloudflare";
-import { Output } from "@pulumi/pulumi";
+import { Config, Output } from "@pulumi/pulumi";
 import { buildCloudflareRecords } from "./cloudflare-records";
 import { DnsRecord, PageRule } from "./types";
+
+const config = new Config();
+const CLOUDFLARE_ACCOUNT_ID = config.require("cloudflareAccountId");
 
 export function setupCloudflare(reverseProxyIp: Output<string>) {
   for (const site of buildCloudflareRecords(reverseProxyIp)) {
@@ -14,6 +17,7 @@ export function setupCloudflare(reverseProxyIp: Output<string>) {
 
 function createZone(domain: string) {
   return new cloudflare.Zone(domain, {
+    accountId: CLOUDFLARE_ACCOUNT_ID,
     zone: domain,
   });
 }
