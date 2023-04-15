@@ -1,7 +1,7 @@
 - name: Install microk8s as snap
   snap:
     name: microk8s
-    channel: 1.25/stable
+    channel: latest/stable
     classic: true
 
 - name: Add kubectl as alias to microk8s.kubectl
