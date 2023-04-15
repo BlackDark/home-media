@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: lidarr
-          image: ghcr.io/linuxserver/lidarr:1.0.2.2592-ls103
+          image: ghcr.io/linuxserver/lidarr:1.1.4.3027-ls118
           ports:
             - name: http
               containerPort: 8686
