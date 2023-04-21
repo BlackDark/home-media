@@ -7,7 +7,8 @@
   packageRules: [
     {
       matchPackagePatterns: ["(^|\\/)linuxserver\\/.*$"],
-      versioning: "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(\\.|-)?(?<build>\\w?\\d+)?-ls\\d+$",
+      versioning: "loose",
+      allowedVersions: "/^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(\\.|-)?(?<build>\\w?\\d+)?-ls\\d+$/",
     },
     {
       matchPaths: ["kubernetes/**"],
