@@ -7,7 +7,7 @@ const TCP_PROTOCOL_ID = "6";
 
 const config = new Config();
 const SHAPE_NAME = config.require("oracleShapeName");
-const IMAGE_NAME = config.require("oracleImageName");
+const IMAGE_SOURCE_ID = config.require("oracleImageId");
 const AVAILABILITY_DOMAIN_NAME = config.require("oracleAvailabilityDomainName");
 const SSH_PUBLIC_KEY = config.require("sshPublicKey");
 
@@ -88,14 +88,6 @@ export function setupOracleCloud() {
     vcnId: vcn.id,
   });
 
-  const images = compartment.id.apply((id) =>
-    oci.core.getImages({
-      compartmentId: id,
-      displayName: IMAGE_NAME,
-    })
-  ).images;
-  const image = images[0]; // there should only be one image with this display name
-
   const instance = new oci.core.Instance(
     "reverse-proxy",
     {
@@ -115,7 +107,7 @@ export function setupOracleCloud() {
       },
       sourceDetails: {
         sourceType: "image",
-        sourceId: image.id,
+        sourceId: IMAGE_SOURCE_ID,
       },
     },
     {
