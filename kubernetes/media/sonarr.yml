@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: sonarr
-          image: ghcr.io/linuxserver/sonarr:3.0.10.1567-ls183
+          image: ghcr.io/linuxserver/sonarr:3.0.10.1567-ls187
           ports:
             - name: http
               containerPort: 8989
