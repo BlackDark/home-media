@@ -61,9 +61,9 @@
   include_tasks: container.yml
   loop:
     - name: transmission
-      image: lscr.io/linuxserver/transmission:3.00-r5-ls135
+      image: lscr.io/linuxserver/transmission:4.0.3-r0-ls169
       env:
-        TRANSMISSION_WEB_HOME: /flood-for-transmission/
+        DOCKER_MODS: linuxserver/mods:transmission-floodui
       #       # USER: username #optional
       #       # PASS: password #optional
       #       # WHITELIST: iplist #optional
