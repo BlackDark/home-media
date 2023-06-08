@@ -1,7 +1,7 @@
 helmChart:
   repo: https://prometheus-community.github.io/helm-charts
   chartName: kube-prometheus-stack
-  chartVersion: 46.6.0
+  chartVersion: 46.7.0
   namespace: monitoring
   releaseName: kube-prometheus
   skipPrePull: true
