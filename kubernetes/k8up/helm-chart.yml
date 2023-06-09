@@ -1,7 +1,7 @@
 helmChart:
   repo: https://k8up-io.github.io/k8up
   chartName: k8up
-  chartVersion: 4.2.2
+  chartVersion: 4.3.0
   namespace: k8up-operator
   releaseName: k8up
   skipPrePull: true
