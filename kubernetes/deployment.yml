@@ -6,7 +6,6 @@ deployments:
   - path: bitwarden
   - path: cert-manager
   - path: default
-  - path: flux-kluctl-controller
   - path: fluxcd
   - path: k8up
   - path: kube-system
@@ -16,6 +15,10 @@ deployments:
   - path: pi-hole
   - path: smart-home
   - path: traefik
+  - git:
+      url: https://github.com/kluctl/kluctl.git
+      subDir: install/controller
+      ref: v2.20.7
 
 vars:
   - file: secrets.yml

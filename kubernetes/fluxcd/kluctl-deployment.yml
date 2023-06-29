@@ -1,4 +1,4 @@
-apiVersion: flux.kluctl.io/v1alpha1
+apiVersion: gitops.kluctl.io/v1beta1
 kind: KluctlDeployment
 metadata:
   name: infrastructure
