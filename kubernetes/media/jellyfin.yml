@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: jellyfin
-          image: ghcr.io/linuxserver/jellyfin:10.8.10-1-ls216
+          image: ghcr.io/linuxserver/jellyfin:10.8.10-1-ls217
           ports:
             - name: http
               containerPort: 8096
