@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: sabnzbd
-          image: ghcr.io/linuxserver/sabnzbd:4.0.2-ls114
+          image: ghcr.io/linuxserver/sabnzbd:4.0.2-ls115
           ports:
             - name: http
               containerPort: 8080
