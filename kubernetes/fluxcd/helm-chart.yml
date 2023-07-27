@@ -1,7 +1,7 @@
 helmChart:
   repo: https://fluxcd-community.github.io/helm-charts
   chartName: flux2
-  chartVersion: 2.9.0
+  chartVersion: 2.9.1
   namespace: flux-system
   releaseName: flux
   skipPrePull: true
