@@ -20,7 +20,7 @@ jobs:
     name: kubernetes
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/kluctl/kluctl:v2.19.3
+      image: ghcr.io/kluctl/kluctl:v2.20.8
     steps:
       - uses: actions/checkout@v3
 
