@@ -19,8 +19,9 @@ jobs:
   kubernetes:
     name: kubernetes
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kluctl/kluctl:v2.19.3
+    env:
+      # renovate: datasource=github-tags depName=kluctl/kluctl
+      KLUCTL_VERSION: v2.20.7
     steps:
       - uses: actions/checkout@v3
 
@@ -33,4 +34,6 @@ jobs:
         run: sops -d -i secrets.yml
 
       - name: Render kluctl resources
-        run: kluctl render --offline-kubernetes --kubernetes-version v1.99.0
+        run: |
+          curl -L https://github.com/kluctl/kluctl/releases/download/${KLUCTL_VERSION}/kluctl_${KLUCTL_VERSION}_linux_amd64.tar.gz | tar xvz
+          ./kluctl render --offline-kubernetes --kubernetes-version v1.99.0
