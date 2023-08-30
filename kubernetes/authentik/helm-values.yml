@@ -29,6 +29,8 @@ ingress:
 postgresql:
   enabled: true
   existingSecret: postgres
+  image:
+    tag: 11.19.0-debian-11-r4
   persistence:
     existingClaim: authentik-app-data
     subPath: postgres
