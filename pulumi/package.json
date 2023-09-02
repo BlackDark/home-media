@@ -5,7 +5,7 @@
         "@types/node": "18.17.12"
     },
     "dependencies": {
-        "@pulumi/cloudflare": "5.5.0",
+        "@pulumi/cloudflare": "5.9.0",
         "@pulumi/oci": "1.2.0",
         "@pulumi/pulumi": "3.74.0"
     }
