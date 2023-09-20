@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: calibre
-          image: ghcr.io/linuxserver/calibre:v6.26.0-ls238
+          image: ghcr.io/linuxserver/calibre:v6.26.0-ls239
           ports:
             - name: http
               containerPort: 8080
