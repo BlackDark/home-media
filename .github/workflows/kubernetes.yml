@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # renovate: datasource=github-tags depName=kluctl/kluctl
-      KLUCTL_VERSION: v2.20.8
+      KLUCTL_VERSION: v2.21.2
     steps:
       - uses: actions/checkout@v3
 
