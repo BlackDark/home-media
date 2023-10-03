@@ -7,3 +7,4 @@ resources:
   - lets-encrypt-staging.yml
   - namespace.yml
   - prometheus-alerts.yml
+  - secret-cloudflare.yml

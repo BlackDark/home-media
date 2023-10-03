@@ -9,5 +9,8 @@ spec:
       name: letsencrypt-production
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
-      - http01:
-          ingress: {}
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
