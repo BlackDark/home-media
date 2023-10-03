@@ -1,16 +1,25 @@
 authentik:
   error_reporting:
     enabled: true
+  postgresql:
+    host: authentik-rw
+    name: authentik
 
 envFrom:
   - secretRef:
       name: authentik-config
 
 envValueFrom:
+  # POSTGRESQL_AUTHENTIK_PASSWORD: "{{ authentik.postgresqlAuthentikPassword }}"
+  # POSTGRESQL_POSTGRES_PASSWORD: "{{ authentik.postgresqlPostgresPassword }}"
+  AUTHENTIK_POSTGRESQL__USER:
+    secretKeyRef:
+      name: authentik-app
+      key: username
   AUTHENTIK_POSTGRESQL__PASSWORD:
     secretKeyRef:
-      name: postgres
-      key: postgresql-password
+      name: authentik-app
+      key: password
 
 ingress:
   enabled: true
@@ -25,17 +34,6 @@ ingress:
     - hosts:
         - authentik.linkvt.de
       secretName: authentik-certificate
-
-postgresql:
-  enabled: true
-  existingSecret: postgres
-  image:
-    tag: 11.19.0-debian-11-r4
-  persistence:
-    existingClaim: authentik-app-data
-    subPath: postgres
-  volumePermissions:
-    enabled: true
 
 prometheus:
   rules:
