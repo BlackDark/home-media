@@ -4,4 +4,6 @@ prometheus:
     enabled: true
   prometheusRule:
     enabled: true
+    addressPoolUsage:
+      enabled: false
   serviceAccount: kube-prometheus-kube-prome-prometheus
