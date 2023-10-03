@@ -5,6 +5,7 @@ deployments:
   - path: authentik
   - path: bitwarden
   - path: cert-manager
+  - path: cnpg-system
   - path: default
   - path: fluxcd
   - path: k8up
