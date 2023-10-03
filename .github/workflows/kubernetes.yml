@@ -23,7 +23,7 @@ jobs:
       # renovate: datasource=github-tags depName=kluctl/kluctl
       KLUCTL_VERSION: v2.21.2
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install sops
         uses: mdgreenwald/mozilla-sops-action@v1.5.0
