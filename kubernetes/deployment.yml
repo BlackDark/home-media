@@ -18,7 +18,9 @@ deployments:
   - git:
       url: https://github.com/kluctl/kluctl.git
       subDir: install/controller
-      ref: v2.20.7
+      ref:
+        # renovate: datasource=github-tags depName=kluctl/kluctl
+        tag: v2.20.7
 
 vars:
   - file: secrets.yml
