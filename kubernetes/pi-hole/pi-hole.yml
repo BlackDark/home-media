@@ -95,7 +95,3 @@ spec:
                 name: pi-hole
                 port:
                   name: http
-  tls:
-    - hosts:
-        - pi-hole.linkvt.de
-      secretName: pi-hole-certificate

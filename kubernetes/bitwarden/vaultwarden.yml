@@ -67,10 +67,6 @@ spec:
                 name: vaultwarden
                 port:
                   name: http
-  tls:
-    - hosts:
-        - bitwarden.linkvt.de
-      secretName: bitwarden-certificate
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -92,7 +88,3 @@ spec:
                 name: vaultwarden
                 port:
                   name: http
-  tls:
-    - hosts:
-        - bitwarden.linkvt.de
-      secretName: bitwarden-certificate

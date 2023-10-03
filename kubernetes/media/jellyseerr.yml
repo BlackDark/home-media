@@ -62,7 +62,3 @@ spec:
                 name: jellyseerr
                 port:
                   name: http
-  tls:
-    - hosts:
-        - jellyseerr.linkvt.de
-      secretName: jellyseerr-certificate

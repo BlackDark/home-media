@@ -68,10 +68,6 @@ spec:
                 name: calibre-web
                 port:
                   name: http
-  tls:
-    - hosts:
-        - calibre.linkvt.de
-      secretName: calibre-web-certificate
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -93,10 +89,6 @@ spec:
                 name: calibre-web
                 port:
                   name: http
-  tls:
-    - hosts:
-        - calibre-basic.linkvt.de
-      secretName: calibre-web-basic-certificate
 
 ---
 apiVersion: networking.k8s.io/v1

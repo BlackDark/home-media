@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: traefik
 resources:
   - helm-rendered.yaml
+  - default-certificate.yml
   - ingress.yml
   - namespace.yml
   - nodeport-service.yml

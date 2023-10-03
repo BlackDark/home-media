@@ -76,7 +76,3 @@ spec:
                 name: zigbee2mqtt
                 port:
                   name: http
-  tls:
-    - hosts:
-        - zigbee2mqtt.linkvt.de
-      secretName: zigbee2mqtt-certificate

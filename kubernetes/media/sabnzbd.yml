@@ -71,10 +71,6 @@ spec:
                 name: sabnzbd
                 port:
                   name: http
-  tls:
-    - hosts:
-        - sabnzbd-basic.linkvt.de
-      secretName: sabnzbd-basic-certificate
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -96,7 +92,3 @@ spec:
                 name: sabnzbd
                 port:
                   name: http
-  tls:
-    - hosts:
-        - sabnzbd.linkvt.de
-      secretName: sabnzbd-certificate

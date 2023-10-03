@@ -67,10 +67,6 @@ spec:
                 name: radarr
                 port:
                   name: http
-  tls:
-    - hosts:
-        - radarr-basic.linkvt.de
-      secretName: radarr-basic-certificate
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -92,7 +88,3 @@ spec:
                 name: radarr
                 port:
                   name: http
-  tls:
-    - hosts:
-        - radarr.linkvt.de
-      secretName: radarr-certificate

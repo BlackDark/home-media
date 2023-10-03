@@ -68,7 +68,3 @@ spec:
                 name: node-red
                 port:
                   name: http
-  tls:
-    - hosts:
-        - node-red.linkvt.de
-      secretName: node-red-certificate

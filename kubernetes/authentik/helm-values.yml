@@ -28,10 +28,6 @@ ingress:
       paths:
         - path: "/"
           pathType: Prefix
-  tls:
-    - hosts:
-        - authentik.linkvt.de
-      secretName: authentik-certificate
 
 prometheus:
   rules:

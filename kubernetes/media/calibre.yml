@@ -68,7 +68,3 @@ spec:
                 name: calibre
                 port:
                   name: http
-  tls:
-    - hosts:
-        - calibre-desktop.linkvt.de
-      secretName: calibre-certificate

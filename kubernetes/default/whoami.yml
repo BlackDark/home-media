@@ -51,7 +51,3 @@ spec:
                 name: whoami
                 port:
                   name: http
-  tls:
-    - hosts:
-        - whoami.linkvt.de
-      secretName: whoami-certificate

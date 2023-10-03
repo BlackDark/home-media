@@ -61,7 +61,3 @@ spec:
                 name: home-assistant
                 port:
                   name: http
-  tls:
-    - hosts:
-        - home-assistant.linkvt.de
-      secretName: home-assistant-certificate

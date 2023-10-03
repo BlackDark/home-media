@@ -97,10 +97,6 @@ spec:
                 name: jellyfin
                 port:
                   name: http
-  tls:
-    - hosts:
-        - jellyfin-basic.linkvt.de
-      secretName: jellyfin-basic-certificate
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -122,7 +118,3 @@ spec:
                 name: jellyfin
                 port:
                   name: http
-  tls:
-    - hosts:
-        - jellyfin.linkvt.de
-      secretName: jellyfin-certificate

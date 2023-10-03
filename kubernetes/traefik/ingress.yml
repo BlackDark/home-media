@@ -18,7 +18,3 @@ spec:
                 name: traefik
                 port:
                   name: traefik
-  tls:
-    - hosts:
-        - traefik.linkvt.de
-      secretName: traefik-certificate
