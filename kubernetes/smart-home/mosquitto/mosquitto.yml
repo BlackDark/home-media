@@ -113,7 +113,3 @@ spec:
 #                 name: mosquitto
 #                 port:
 #                   name: http
-#   tls:
-#     - hosts:
-#         - mosquitto.linkvt.de
-#       secretName: mosquitto-certificate

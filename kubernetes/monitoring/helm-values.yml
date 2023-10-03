@@ -6,10 +6,6 @@ alertmanager:
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
       - alertmanager.linkvt.de
-    tls:
-      - secretName: alertmanager-certificate
-        hosts:
-          - alertmanager.linkvt.de
   config:
     global:
       smtp_auth_password: "{{ smtp.password }}"
@@ -57,10 +53,6 @@ grafana:
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
       - grafana.linkvt.de
-    tls:
-      - secretName: grafana-certificate
-        hosts:
-          - grafana.linkvt.de
 
 prometheus:
   ingress:
@@ -70,10 +62,6 @@ prometheus:
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
       - prometheus.linkvt.de
-    tls:
-      - secretName: prometheus-certificate
-        hosts:
-          - prometheus.linkvt.de
   prometheusSpec:
     ruleSelectorNilUsesHelmValues: false
     serviceMonitorSelectorNilUsesHelmValues: false
