@@ -10,8 +10,6 @@ envFrom:
       name: authentik-config
 
 envValueFrom:
-  # POSTGRESQL_AUTHENTIK_PASSWORD: "{{ authentik.postgresqlAuthentikPassword }}"
-  # POSTGRESQL_POSTGRES_PASSWORD: "{{ authentik.postgresqlPostgresPassword }}"
   AUTHENTIK_POSTGRESQL__USER:
     secretKeyRef:
       name: authentik-app

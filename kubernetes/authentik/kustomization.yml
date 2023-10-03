@@ -6,5 +6,4 @@ resources:
   - middleware-authentik.yml
   - namespace.yml
   - secret-authentik.yml
-  - secret-postgres.yml
   - storage-cpng.yml
