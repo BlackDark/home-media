@@ -4,3 +4,4 @@ namespace: cnpg-system
 resources:
   - helm-rendered.yaml
   - namespace.yml
+  - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/v1.20.2/docs/src/samples/monitoring/grafana-configmap.yaml

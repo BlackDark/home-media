@@ -8,3 +8,4 @@ resources:
   - secret-authentik.yml
   - secret-postgres.yml
   - storage.yml
+  - storage-cpng.yml
