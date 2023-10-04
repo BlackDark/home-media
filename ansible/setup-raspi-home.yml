@@ -8,10 +8,10 @@
       tags: caddy
     - role: homer
       tags: homer
-      message: local
+      homer_message: local
     - role: homer
       tags: homer
-      message: vpn
+      homer_message: vpn
       homer_instance: homer-remote
       homer_port: 8082 # see group_vars/all
-      load_balancer_ip: 100.91.165.113 # see group_vars/all
+      homer_load_balancer_ip: 100.91.165.113 # see group_vars/all

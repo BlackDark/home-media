@@ -1,7 +1,7 @@
-vpn_container_name: nordvpn
+seedbox_vpn_container_name: nordvpn
 
-p2p_base_dir: /data/p2p
-p2p_config_dir: "{{ p2p_base_dir }}/config"
+seedbox_p2p_base_dir: /data/p2p
+seedbox_p2p_config_dir: "{{ seedbox_p2p_base_dir }}/config"
 
-downloads_dir: "{{ p2p_base_dir }}/downloads"
-watch_dir: "{{ p2p_base_dir }}/watch"
+seedbox_downloads_dir: "{{ seedbox_p2p_base_dir }}/downloads"
+seedbox_watch_dir: "{{ seedbox_p2p_base_dir }}/watch"
