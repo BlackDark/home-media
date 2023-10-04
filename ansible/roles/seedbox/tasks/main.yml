@@ -12,7 +12,7 @@
 
 - name: Start the nordvpn container
   docker_container:
-    name: "{{ vpn_container_name }}"
+    name: "{{ seedbox_vpn_container_name }}"
     image: azinchen/nordvpn:2.9.0
     restart_policy: unless-stopped # tmp enable again when it is working with tailscale
     ports:
@@ -53,9 +53,9 @@
     group: 1000
     mode: "0755"
   loop:
-    - "{{ p2p_base_dir }}"
-    - "{{ downloads_dir }}"
-    - "{{ watch_dir }}"
+    - "{{ seedbox_p2p_base_dir }}"
+    - "{{ seedbox_downloads_dir }}"
+    - "{{ seedbox_watch_dir }}"
 
 - name: Start all containers
   include_tasks: container.yml
@@ -70,7 +70,7 @@
       #       # PEERPORT: peerport #optional
       #       # HOST_WHITELIST: dnsname list #optional
       volumes:
-        - "{{ p2p_base_dir }}/watch:/watch"
+        - "{{ seedbox_p2p_base_dir }}/watch:/watch"
     # - name: radarr
     #   image: lscr.io/linuxserver/radarr:4.1.0.6175-ls152
     # - name: sonarr

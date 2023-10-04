@@ -17,19 +17,19 @@ services:
         url: https://home-assistant.linkvt.de
       - name: Transmission
         logo: assets/tools/transmission.svg
-        url: http://transmission.{{ load_balancer_ip }}.sslip.io/
+        url: http://transmission.{{ homer_load_balancer_ip }}.sslip.io/
       - name: Jackett
         logo: assets/tools/jackett.png
-        url: http://jackett.{{ load_balancer_ip }}.sslip.io/
+        url: http://jackett.{{ homer_load_balancer_ip }}.sslip.io/
       - name: Prowlarr
         logo: assets/tools/prowlarr.png
-        url: http://prowlarr.{{ load_balancer_ip }}.sslip.io/
+        url: http://prowlarr.{{ homer_load_balancer_ip }}.sslip.io/
   - name: Network
     icon: fas fa-network-wired
     items:
       - name: Pi-hole
         logo: assets/tools/pi-hole.png
-        url: http://pi-hole.{{ load_balancer_ip }}.sslip.io/
+        url: http://pi-hole.{{ homer_load_balancer_ip }}.sslip.io/
         type: PiHole
   - name: Other
     icon: fas fa-house
@@ -42,7 +42,7 @@ services:
         type: OpenWeather
       - name: Bitwarden (local)
         logo: assets/tools/bitwarden.png
-        url: http://bitwarden.{{ load_balancer_ip }}.sslip.io/
+        url: http://bitwarden.{{ homer_load_balancer_ip }}.sslip.io/
       - name: Home Assistant (local)
         logo: assets/tools/home-assistant.png
-        url: http://home-assistant.{{ load_balancer_ip }}.sslip.io/
+        url: http://home-assistant.{{ homer_load_balancer_ip }}.sslip.io/
