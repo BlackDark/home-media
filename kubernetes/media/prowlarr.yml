@@ -17,7 +17,7 @@ spec:
             claimName: media-app-data
       containers:
         - name: prowlarr
-          image: ghcr.io/linuxserver/prowlarr:1.7.4.3769-ls29
+          image: linuxserver/prowlarr:1.7.4.3769-ls29
           ports:
             - name: http
               containerPort: 9696
