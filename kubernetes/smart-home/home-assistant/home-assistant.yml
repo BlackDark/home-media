@@ -14,7 +14,7 @@ spec:
       # hostNetwork: true # enable for home assistant discovery
       containers:
         - name: home-assistant
-          image: ghcr.io/home-assistant/home-assistant:2023.10.3
+          image: ghcr.io/home-assistant/home-assistant:2023.10.4
           ports:
             - name: http
               containerPort: 8123
