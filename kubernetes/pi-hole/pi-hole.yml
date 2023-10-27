@@ -15,6 +15,9 @@ spec:
         - name: app-data
           persistentVolumeClaim:
             claimName: pi-hole-app-data
+        - name: dnsmasq-config
+          configMap:
+            name: dnsmasq-config-{{ load_sha256("dnsmasq-configmap.yml") }}
       containers:
         - name: pi-hole
           image: ghcr.io/pi-hole/pihole:2023.10.0
@@ -32,6 +35,22 @@ spec:
               value: Europe/Berlin
             - name: VIRTUAL_HOST
               value: pi-hole.linkvt.de
+          livenessProbe:
+            httpGet:
+              path: /admin/index.php
+              port: http
+            failureThreshold: 5
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /admin/index.php
+              port: http
+            failureThreshold: 10
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 1
           volumeMounts:
             - mountPath: /etc/pihole
               name: app-data
@@ -39,6 +58,9 @@ spec:
             - mountPath: /etc/dnsmasq.d
               name: app-data
               subPath: dnsmasq.d
+            - mountPath: /etc/dnsmasq.d/02-dnsmasq.conf
+              name: dnsmasq-config
+              subPath: 02-custom.conf
 
 ---
 apiVersion: v1
