@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: media-app-data
+            claimName: jellyfin-local
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -30,7 +30,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: jellyfin
             - mountPath: /data
               name: media
 
@@ -118,3 +117,16 @@ spec:
                 name: jellyfin
                 port:
                   name: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-local
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: media-app-data
+            claimName: calibre-local
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -30,7 +30,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: calibre
             - mountPath: /books
               name: media
               subPath: all/books
@@ -68,3 +67,16 @@ spec:
                 name: calibre
                 port:
                   name: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: calibre-local
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

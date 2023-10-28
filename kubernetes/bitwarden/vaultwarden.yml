@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: vaultwarden-app-data
+            claimName: vaultwarden-local
 
 ---
 apiVersion: v1

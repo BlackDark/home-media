@@ -54,7 +54,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: mosquitto-app-data
+            claimName: mosquitto-local
         - name: mosquitto-conf
           configMap:
             name: mosquitto-conf

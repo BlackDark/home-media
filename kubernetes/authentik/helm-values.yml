@@ -39,7 +39,7 @@ redis:
   enabled: true
   master:
     persistence:
-      existingClaim: authentik-app-data
-      subPath: redis
+      enabled: true
+      storageClass: local-path
   volumePermissions:
     enabled: true

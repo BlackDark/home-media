@@ -1,25 +1,9 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: vaultwarden-app-data
-spec:
-  storageClassName: ""
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data/apps/vaultwarden"
-    type: DirectoryOrCreate
-
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: vaultwarden-app-data
+  name: vaultwarden-local
 spec:
-  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: vaultwarden-app-data
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:

@@ -27,7 +27,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: home-assistant-app-data
+            claimName: home-assistant-local
 
 ---
 apiVersion: v1

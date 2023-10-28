@@ -15,5 +15,4 @@ resources:
   - samba.yml
   - secret-media-basic-auth.yml
   - sonarr.yml
-  - storage-app.yml
   - storage-media.yml

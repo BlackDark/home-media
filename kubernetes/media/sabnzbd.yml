@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: media-app-data
+            claimName: sabnzbd-local
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -30,7 +30,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: sabnzbd
             - mountPath: /downloads
               name: media
               subPath: usenet/
@@ -92,3 +91,16 @@ spec:
                 name: sabnzbd
                 port:
                   name: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sabnzbd-local
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

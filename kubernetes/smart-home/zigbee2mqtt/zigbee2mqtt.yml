@@ -35,7 +35,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: zigbee2mqtt-app-data
+            claimName: zigbee2mqtt-local
         - name: zigbee2mqtt-initial-config
           configMap:
             name: zigbee2mqtt-initial-config

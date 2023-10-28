@@ -1,27 +1,11 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pi-hole-app-data
-spec:
-  storageClassName: ""
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data/apps/pi-hole"
-    type: DirectoryOrCreate
-
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pi-hole-app-data
+  name: pi-hole-local
 spec:
-  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: pi-hole-app-data
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  storageClassName: local-path

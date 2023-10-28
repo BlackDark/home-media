@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: media-app-data
+            claimName: jellyseerr-local
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:1.7.0
@@ -27,7 +27,6 @@ spec:
           volumeMounts:
             - mountPath: /app/config
               name: app-data
-              subPath: jellyseerr
 
 ---
 apiVersion: v1
@@ -62,3 +61,16 @@ spec:
                 name: jellyseerr
                 port:
                   name: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyseerr-local
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

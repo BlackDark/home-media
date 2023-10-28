@@ -11,24 +11,9 @@ spec:
     enablePodMonitor: true
   storage:
     pvcTemplate:
-      storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-      volumeName: authentik-cpng-app-data
+      storageClassName: local-path
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
           storage: 1Gi
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: authentik-cpng-app-data
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data/apps/authentik/cpng"
-    type: DirectoryOrCreate

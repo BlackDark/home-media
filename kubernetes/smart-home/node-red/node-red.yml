@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: node-red-app-data
+            claimName: node-red-local
 
 ---
 apiVersion: v1

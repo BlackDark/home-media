@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: media-app-data
+            claimName: prowlarr-local
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr:1.9.4.4039-ls36
@@ -27,7 +27,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: prowlarr
 
 ---
 apiVersion: v1
@@ -62,3 +61,16 @@ spec:
                 name: prowlarr
                 port:
                   name: http
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prowlarr-local
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

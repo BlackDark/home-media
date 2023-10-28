@@ -7,4 +7,3 @@ resources:
   - namespace.yml
   - postgres.yml
   - secret-authentik.yml
-  - storage.yml
