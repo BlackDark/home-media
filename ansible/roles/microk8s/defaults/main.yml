@@ -6,4 +6,5 @@ microk8s_addons:
   - dns
   - metrics-server
 
-microk8s_addons_disabled: []
+microk8s_addons_disabled:
+  - hostpath-storage

@@ -1,0 +1,7 @@
+helmChart:
+  repo: https://charts.containeroo.ch
+  chartName: local-path-provisioner
+  chartVersion: 0.0.24
+  namespace: local-path-provisioner
+  releaseName: local-path-provisioner
+  skipPrePull: true

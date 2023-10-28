@@ -2,6 +2,11 @@ commonLabels:
   de.linkvt/stack: home-server
 
 deployments:
+  - path: kube-system
+  - path: local-path-provisioner
+  - barrier: true # storage is required by many apps
+  - path: monitoring
+  - barrier: true # prometheus CRDs are required to deploy the apps
   - path: authentik
   - path: bitwarden
   - path: cert-manager
@@ -9,10 +14,8 @@ deployments:
   - path: default
   - path: fluxcd
   - path: k8up
-  - path: kube-system
   - path: media
   - path: metallb
-  - path: monitoring
   - path: pi-hole
   - path: smart-home
   - path: traefik
