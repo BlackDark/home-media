@@ -20,7 +20,7 @@ spec:
             name: samba-config
       containers:
         - name: samba
-          image: ghcr.io/crazy-max/samba:4.18.5
+          image: ghcr.io/crazy-max/samba:4.18.8
           ports:
             - name: smb
               containerPort: 445
