@@ -6,3 +6,6 @@ data:
   02-custom.conf: |
     address=/linkvt.de/10.0.0.5
     address=/h.linkvt.de/10.0.0.5
+
+    # Block IPv6 responses for *.linkvt.de
+    address=/linkvt.de/::
