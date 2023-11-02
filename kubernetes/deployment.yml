@@ -24,7 +24,7 @@ deployments:
       subDir: install/controller
       ref:
         # renovate: datasource=github-tags depName=kluctl/kluctl
-        tag: v2.21.2
+        tag: v2.22.0
 
 vars:
   - file: secrets.yml
