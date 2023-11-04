@@ -9,3 +9,7 @@ data:
 
     # Block IPv6 responses for *.linkvt.de
     address=/linkvt.de/::
+
+    # Set specific DNS servers for www.linkvt.de
+    server=/www.linkvt.de/1.1.1.1
+    server=/www.linkvt.de/8.8.8.8
