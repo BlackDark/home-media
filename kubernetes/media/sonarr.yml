@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:3.0.10.1567-ls212
+          image: linuxserver/sonarr:3.0.10.1567-ls213
           ports:
             - name: http
               containerPort: 8989
