@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: calibre
-          image: linuxserver/calibre:v6.29.0-ls245
+          image: linuxserver/calibre:v7.0.0-ls250
           ports:
             - name: http
               containerPort: 8080
