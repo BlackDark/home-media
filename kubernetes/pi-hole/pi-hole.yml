@@ -20,7 +20,7 @@ spec:
             name: dnsmasq-config-{{ load_sha256("dnsmasq-configmap.yml") }}
       containers:
         - name: pi-hole
-          image: ghcr.io/pi-hole/pihole:2023.10.0
+          image: ghcr.io/pi-hole/pihole:2023.11.0
           ports:
             - name: http
               containerPort: 80
