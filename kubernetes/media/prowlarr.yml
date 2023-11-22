@@ -17,7 +17,7 @@ spec:
             claimName: prowlarr-local
       containers:
         - name: prowlarr
-          image: linuxserver/prowlarr:1.9.4.4039-ls39
+          image: linuxserver/prowlarr:1.9.4.4039-ls40
           ports:
             - name: http
               containerPort: 9696
