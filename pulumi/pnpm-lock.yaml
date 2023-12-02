@@ -9,8 +9,8 @@ dependencies:
     specifier: 5.16.0
     version: 5.16.0
   '@pulumi/oci':
-    specifier: 1.15.0
-    version: 1.15.0
+    specifier: 1.16.1
+    version: 1.16.1
   '@pulumi/pulumi':
     specifier: 3.91.1
     version: 3.91.1
@@ -240,8 +240,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/oci@1.15.0:
-    resolution: {integrity: sha512-1+otfRPB0anmc+LcFLvqXYdgpi9YIFiTi4V+tvIYc9FTcZVUqL86lqwDQoyMgnuh+AYSbPXzfNG1DMgn+yzChw==}
+  /@pulumi/oci@1.16.1:
+    resolution: {integrity: sha512-huqyNxegL6GhS5jJKToPeHxTJsB/r7LFLjymRtYO0Ii1lArkxdjgUNvnu4aVgyM4XS+tZsGUh3htCPwF/U3iHg==}
     dependencies:
       '@pulumi/pulumi': 3.91.1
     transitivePeerDependencies:
