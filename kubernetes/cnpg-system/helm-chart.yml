@@ -1,7 +1,7 @@
 helmChart:
   repo: https://cloudnative-pg.io/charts/
   chartName: cloudnative-pg
-  chartVersion: 0.19.1
+  chartVersion: 0.20.0
   namespace: cnpg-system
   releaseName: cloudnative-pg
   skipPrePull: true
