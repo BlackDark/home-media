@@ -2,7 +2,7 @@
     "name": "infrastructure",
     "main": "index.ts",
     "devDependencies": {
-        "@types/node": "20.10.1"
+        "@types/node": "20.10.6"
     },
     "dependencies": {
         "@pulumi/cloudflare": "5.16.0",
