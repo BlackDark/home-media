@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: sabnzbd
-          image: linuxserver/sabnzbd:4.2.0-ls144
+          image: linuxserver/sabnzbd:4.2.1-ls144
           ports:
             - name: http
               containerPort: 8080
