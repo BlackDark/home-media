@@ -3,6 +3,12 @@ kind: KluctlDeployment
 metadata:
   name: infrastructure
 spec:
+  credentials:
+    git:
+      - host: github.com
+        path: linkvt/*
+        secretRef:
+          name: infrastructure-git-credentials
   decryption:
     provider: sops
     secretRef:
@@ -11,8 +17,7 @@ spec:
   interval: 60m
   prune: true
   source:
-    url: https://github.com/linkvt/infrastructure.git
-    path: "./kubernetes"
-    secretRef:
-      name: infrastructure-git-credentials
+    git:
+      url: https://github.com/linkvt/infrastructure.git
+      path: kubernetes
   timeout: 5m
