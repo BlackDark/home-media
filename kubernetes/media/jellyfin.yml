@@ -18,6 +18,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
+        - name: dev-dri
+          hostPath:
+            path: /dev/dri
       containers:
         - name: jellyfin
           image: linuxserver/jellyfin:10.8.13-1-ls240
@@ -27,11 +30,15 @@ spec:
           envFrom:
             - configMapRef:
                 name: common-deployment-environment
+          securityContext:
+            privileged: true
           volumeMounts:
             - mountPath: /config
               name: app-data
             - mountPath: /data
               name: media
+            - mountPath: /dev/dri
+              name: dev-dri
 
 ---
 apiVersion: v1
