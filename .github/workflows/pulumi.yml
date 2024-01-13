@@ -35,7 +35,7 @@ jobs:
       - run: pnpm install
 
       - name: pulumi preview
-        uses: pulumi/actions@v4
+        uses: pulumi/actions@v5
         with:
           command: preview
           stack-name: prod
@@ -45,7 +45,7 @@ jobs:
 
       - name: pulumi up
         if: github.ref == 'refs/heads/main'
-        uses: pulumi/actions@v4
+        uses: pulumi/actions@v5
         with:
           command: up
           stack-name: prod
