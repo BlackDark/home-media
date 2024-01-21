@@ -1,5 +1,5 @@
 commonLabels:
-  de.eduard-marbach/stack: blackdar-oci
+  de.eduard-marbach/stack: blackdark-oci
 
 deployments:
   - path: kube-system
