@@ -1,0 +1,6 @@
+.terraform
+files/*.cfg
+!files/*.tmpl.cfg
+*.tfstate
+*.tfstate.backup
+*.tfvars
