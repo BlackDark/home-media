@@ -2,8 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: authentik
 resources:
+  - namespace.yml
   - helm-rendered.yaml
   - middleware-authentik.yml
-  - namespace.yml
   - postgres.yml
   - secret-authentik.yml
+  - storage.yml

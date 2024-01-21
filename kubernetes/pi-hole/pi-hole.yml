@@ -34,23 +34,7 @@ spec:
             - name: TZ
               value: Europe/Berlin
             - name: VIRTUAL_HOST
-              value: pi-hole.linkvt.de
-          livenessProbe:
-            httpGet:
-              path: /admin/index.php
-              port: http
-            failureThreshold: 5
-            initialDelaySeconds: 20
-            periodSeconds: 10
-            timeoutSeconds: 1
-          readinessProbe:
-            httpGet:
-              path: /admin/index.php
-              port: http
-            failureThreshold: 10
-            initialDelaySeconds: 20
-            periodSeconds: 5
-            timeoutSeconds: 1
+              value: pi-hole.oci.eduard-marbach.de
           volumeMounts:
             - mountPath: /etc/pihole
               name: app-data
@@ -107,7 +91,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: pi-hole.linkvt.de
+    - host: pi-hole.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix

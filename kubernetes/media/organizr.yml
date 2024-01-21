@@ -1,102 +1,96 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonarr
+  name: organizr
 spec:
   selector:
     matchLabels:
-      app: sonarr
+      app: organizr
   template:
     metadata:
       labels:
-        app: sonarr
+        app: organizr
     spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
             claimName: media-app-data
-        - name: media
-          persistentVolumeClaim:
-            claimName: media-downloads
       containers:
-        - name: sonarr
-          image: linuxserver/sonarr:4.0.1.929-ls222
+        - name: organizr
+          image: organizr/organizr:latest
           ports:
             - name: http
-              containerPort: 8989
+              containerPort: 80
           envFrom:
             - configMapRef:
                 name: common-deployment-environment
+          env:
+            - name: "fpm"
+              value: "false"
+            - name: "branch"
+              value: "v2-master"
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: sonarr
-            - mountPath: /data
-              name: media
-
+              subPath: organizr
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sonarr
+  name: organizr
 spec:
   ports:
     - port: 80
       name: http
       targetPort: http
   selector:
-    app: sonarr
+    app: organizr
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sonarr-basic
+  name: organizr-basic
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: sonarr-basic.oci.eduard-marbach.de
+    - host: organizr-basic.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: sonarr
+                name: organizr
                 port:
                   name: http
-
+  tls:
+    - hosts:
+        - organizr-basic.oci.eduard-marbach.de
+      secretName: organizr-basic-certificate
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sonarr
+  name: organizr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: sonarr.oci.eduard-marbach.de
+    - host: organizr.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: sonarr
+                name: organizr
                 port:
                   name: http
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: sonarr-local
-# spec:
-#   storageClassName: local-path
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 1Gi
+  tls:
+    - hosts:
+        - organizr.oci.eduard-marbach.de
+      secretName: organizr-certificate

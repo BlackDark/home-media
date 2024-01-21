@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: prowlarr-local
+            claimName: media-app-data
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr:1.12.2.4211-ls48
@@ -27,6 +27,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
+              subPath: prowlarr
 
 ---
 apiVersion: v1
@@ -51,7 +52,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: prowlarr.linkvt.de
+    - host: prowlarr.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -61,16 +62,15 @@ spec:
                 name: prowlarr
                 port:
                   name: http
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: prowlarr-local
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: prowlarr-local
+# spec:
+#   storageClassName: local-path
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi

@@ -41,7 +41,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: whoami.linkvt.de
+    - host: whoami.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix

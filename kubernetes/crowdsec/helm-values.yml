@@ -1,0 +1,26 @@
+agent:
+  # To specify each pod you want to process it logs (pods present in the node)
+  acquisition:
+    # The namespace where the pod is located
+    - namespace: ingress-nginx
+      # The pod name
+      podName: ingress-nginx-controller-*
+      # as in crowdsec configuration, we need to specify the program name so the parser will match and parse logs
+      program: nginx
+  # Those are ENV variables
+  env:
+    # As we are running Nginx, we want to install the Nginx collection
+    - name: COLLECTIONS
+      value: "crowdsecurity/nginx"
+lapi:
+  dashboard:
+    enabled: true
+    image:
+      repository: bobblybook/metabase
+  env: []
+  persistentVolume:
+    # -- Persistent volume for data folder. Stores e.g. registered bouncer api keys
+    data:
+      existingClaim: "crowdsec-data"
+    config:
+      existingClaim: "crowdsec-config"

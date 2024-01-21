@@ -2,17 +2,30 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: media
 resources:
+  - namespace.yml
+  - storage-app.yml
+  - storage-media.yml
+  - secret-media-basic-auth.yml
+  - config.yml
+  - middleware-basic-auth.yml
   - calibre.yml
   - calibre-web.yml
-  - config.yml
   - jellyfin.yml
   - jellyseerr.yml
-  - middleware-basic-auth.yml
-  - namespace.yml
   - prowlarr.yml
   - radarr.yml
+  - recyclarr.yml
   - sabnzbd.yml
   - samba.yml
-  - secret-media-basic-auth.yml
   - sonarr.yml
-  - storage-media.yml
+  - sonarr-anime.yml
+  #- plex.yml
+  - jelly-trakt-hook.yml
+  #- organizr.yml
+  #- freshrss.yml
+
+configMapGenerator:
+  - name: recyclarr
+    files:
+      - recyclarr/recyclarr.yml
+      - recyclarr/settings.yml

@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: sabnzbd-local
+            claimName: media-app-data
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -30,12 +30,15 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
+              subPath: sabnzbd
             - mountPath: /downloads
               name: media
               subPath: usenet/
             - mountPath: /incomplete-downloads
               name: media
               subPath: usenet/_incomplete
+            - mountPath: /data
+              name: media
 
 ---
 apiVersion: v1
@@ -60,7 +63,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: sabnzbd-basic.linkvt.de
+    - host: sabnzbd-basic.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -81,7 +84,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: sabnzbd.linkvt.de
+    - host: sabnzbd.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -91,16 +94,18 @@ spec:
                 name: sabnzbd
                 port:
                   name: http
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: sabnzbd-local
+# spec:
+#   storageClassName: local-path
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sabnzbd-local
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+# kubectl -n media exec -it sabnzbd-86d6bf7f84-fqkr9 -- bash -c 'sed -i -e "s/^host_whitelist *=.*$/host_whitelist = ${HOSTNAME},sabnzbd.oci.eduard-marbach.de,sabnzbd,sabnzbd.media /g" /config/sabnzbd.ini'
+# kubectl -n media exec -it prowlarr-6cff74cbbb-4bg9s -- bash -c 'sed -i -e "s/^  <AuthenticationMethod>None<\/AuthenticationMethod>$/  <AuthenticationMethod>External<\/AuthenticationMethod>/g" /config/config.xml'

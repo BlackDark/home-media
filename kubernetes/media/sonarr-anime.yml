@@ -1,70 +1,70 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vaultwarden
+  name: sonarr-anime
 spec:
   selector:
     matchLabels:
-      app: vaultwarden
+      app: sonarr-anime
   template:
     metadata:
       labels:
-        app: vaultwarden
+        app: sonarr-anime
     spec:
-      # initContainers:
-      #   - name: volume-permissions
-      #     image: busybox:1.35
-      #     command: ["sh", "-c", "chown 1000:1000 /data"]
-      #     volumeMounts:
-      #       - name: app-data
-      #         mountPath: /data
-      containers:
-        - name: vaultwarden
-          image: vaultwarden/server:1.30.1-alpine
-          ports:
-            - name: http
-              containerPort: 80
-          env:
-            - name: TZ
-              value: Europe/Berlin
-          volumeMounts:
-            - name: app-data
-              mountPath: /data
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: vaultwarden-local
+            claimName: media-app-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-downloads
+      containers:
+        - name: sonarr-anime
+          image: linuxserver/sonarr:4.0.0.748-ls220
+          ports:
+            - name: http
+              containerPort: 8989
+          envFrom:
+            - configMapRef:
+                name: common-deployment-environment
+          volumeMounts:
+            - mountPath: /config
+              name: app-data
+              subPath: sonarr-anime
+            - mountPath: /data
+              name: media
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: vaultwarden
+  name: sonarr-anime
 spec:
   ports:
     - port: 80
       name: http
       targetPort: http
   selector:
-    app: vaultwarden
+    app: sonarr-anime
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vaultwarden
+  name: sonarr-anime-basic
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: bitwarden.oci.eduard-marbach.de
+    - host: sonarr-anime-basic.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: vaultwarden
+                name: sonarr-anime
                 port:
                   name: http
 
@@ -72,19 +72,19 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vaultwarden-admin
+  name: sonarr-anime
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: bitwarden.oci.eduard-marbach.de
+    - host: sonarr-anime.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
-            path: /admin
+            path: /
             backend:
               service:
-                name: vaultwarden
+                name: sonarr-anime
                 port:
                   name: http

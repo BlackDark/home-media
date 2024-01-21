@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt
 spec:
   acme:
-    email: mail@linkvt.de
+    email: mail@eduard-marbach.de
     privateKeySecretRef:
       name: letsencrypt-production
     server: https://acme-v02.api.letsencrypt.org/directory

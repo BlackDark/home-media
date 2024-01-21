@@ -58,7 +58,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: node-red.linkvt.de
+    - host: node-red.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix

@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: jellyfin-local
+            claimName: media-app-data
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -35,6 +35,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
+              subPath: jellyfin
             - mountPath: /data
               name: media
             - mountPath: /dev/dri
@@ -52,7 +53,6 @@ spec:
       targetPort: http
   selector:
     app: jellyfin
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -93,7 +93,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: jellyfin-basic.linkvt.de
+    - host: jellyfin-basic.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -114,7 +114,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: jellyfin.linkvt.de
+    - host: jellyfin.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -124,16 +124,34 @@ spec:
                 name: jellyfin
                 port:
                   name: http
-
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: jellyfin-local
+  name: jellyfin-test
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+  rules:
+    - host: jellyfin-test.oci.eduard-marbach.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  name: http
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: jellyfin-local
+# spec:
+#   storageClassName: local-path
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi

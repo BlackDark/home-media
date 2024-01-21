@@ -4,10 +4,38 @@ additionalArguments:
 
 deployment:
   replicas: 1
+  additionalVolumes:
+    - name: logs
+      persistentVolumeClaim:
+        claimName: traefik
 
 logs:
   access:
     enabled: true
+    filePath: "/var/log/traefik/access.log"
+    fields:
+      general:
+        # -- Available modes: keep, drop, redact.
+        defaultmode: keep
+        # -- Names of the fields to limit.
+        names:
+          {}
+          ## Examples:
+          # ClientUsername: drop
+      headers:
+        # -- Available modes: keep, drop, redact.
+        defaultmode: keep
+        # -- Names of the headers to limit.
+        names:
+          {}
+          ## Examples:
+          # User-Agent: redact
+          # Authorization: drop
+          # Content-Type: keep
+
+updateStrategy:
+  type: Recreate
+  rollingUpdate: null
 
 ports:
   traefik:
@@ -16,7 +44,9 @@ ports:
     # https://docs.traefik.io/routing/entrypoints/#redirection
     redirectTo:
       port: websecure
+    hostPort: 80
   websecure:
+    hostPort: 443
     # Trust forwarded  headers information (X-Forwarded-*).
     forwardedHeaders:
       trustedIPs:
@@ -45,3 +75,8 @@ ports:
 service:
   annotations:
     metallb.universe.tf/allow-shared-ip: "main"
+
+additionalVolumeMounts:
+  - name: logs
+    mountPath: /var/log/traefik
+    subPath: logs

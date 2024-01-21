@@ -1,0 +1,58 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: recyclarr
+spec:
+  schedule: "0 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: recyclarr
+              image: recyclarr/recyclarr:6.0.2
+              imagePullPolicy: Always
+              command:
+                - recyclarr
+                - sync
+              envFrom:
+                - configMapRef:
+                    name: common-deployment-environment
+              volumeMounts:
+                - mountPath: /config
+                  name: app-data
+                  subPath: recyclarr
+                - name: config-volume
+                  mountPath: /config/recyclarr.yml
+                  subPath: recyclarr.yml
+                - name: config-volume
+                  mountPath: /config/settings.yml
+                  subPath: settings.yml
+                - name: secret-volume
+                  mountPath: /config/secrets.yml
+                  subPath: secrets.yml
+          volumes:
+            - name: app-data
+              persistentVolumeClaim:
+                claimName: media-app-data
+            - name: config-volume
+              configMap:
+                name: recyclarr
+            - name: secret-volume
+              secret:
+                secretName: recyclarr
+          restartPolicy: Never
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: recyclarr
+type: Opaque
+stringData:
+  secrets.yml: |
+    SONARR_API_KEY: "{{ recyclarr.sonarrApiKey }}"
+    SONARR_ANIME_API_KEY: "{{ recyclarr.sonarrAnimeApiKey }}"
+    RADARR_API_KEY: "{{ recyclarr.radarrApiKey }}"

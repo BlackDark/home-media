@@ -1,19 +1,50 @@
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: authentik
+  name: authentik-db
 spec:
   instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.3
   bootstrap:
-    initdb:
-      database: authentik
+    pg_basebackup:
+      source: source-db
+  externalClusters:
+    - name: source-db
+      connectionParameters:
+        host: authentik-rw.authentik.svc
+        user: streaming_replica
+        sslmode: verify-full
+      sslKey:
+        name: authentik-replication
+        key: tls.key
+      sslCert:
+        name: authentik-replication
+        key: tls.crt
+      sslRootCert:
+        name: authentik-ca
+        key: ca.crt
   monitoring:
     enablePodMonitor: true
   storage:
     pvcTemplate:
-      storageClassName: local-path
+      storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+      volumeName: authentik-db-cpng-app-data
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
           storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: authentik-db-cpng-app-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/srv/indigo/apps/authentik/db-cpng"
+    type: DirectoryOrCreate

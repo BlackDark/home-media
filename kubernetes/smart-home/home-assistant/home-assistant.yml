@@ -51,7 +51,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-    - host: home-assistant.linkvt.de
+    - host: home-assistant.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix

@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: jellyseerr-local
+            claimName: media-app-data
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:1.7.0
@@ -27,6 +27,7 @@ spec:
           volumeMounts:
             - mountPath: /app/config
               name: app-data
+              subPath: jellyseerr
 
 ---
 apiVersion: v1
@@ -51,7 +52,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: jellyseerr.linkvt.de
+    - host: jellyseerr.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -61,16 +62,15 @@ spec:
                 name: jellyseerr
                 port:
                   name: http
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyseerr-local
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: jellyseerr-local
+# spec:
+#   storageClassName: local-path
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi

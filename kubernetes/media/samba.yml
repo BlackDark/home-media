@@ -30,7 +30,7 @@ spec:
           volumeMounts:
             - mountPath: /media/data
               name: media
-            - mountPath: /data/config.yml
+            - mountPath: /srv/indigo/config.yml
               name: config
               subPath: config.yml
 

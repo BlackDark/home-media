@@ -14,7 +14,7 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: calibre-web-local
+            claimName: media-app-data
         - name: media
           persistentVolumeClaim:
             claimName: media-downloads
@@ -30,6 +30,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: app-data
+              subPath: calibre-web
             - mountPath: /books
               name: media
               subPath: all/books
@@ -57,7 +58,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: calibre.linkvt.de
+    - host: calibre.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -78,7 +79,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: media-basic-auth@kubernetescrd
 spec:
   rules:
-    - host: calibre-basic.linkvt.de
+    - host: calibre-basic.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
@@ -118,16 +119,15 @@ spec:
                 name: calibre-web
                 port:
                   name: http
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: calibre-web-local
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: calibre-web-local
+# spec:
+#   storageClassName: local-path
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi

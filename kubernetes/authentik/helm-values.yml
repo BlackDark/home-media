@@ -2,7 +2,7 @@ authentik:
   error_reporting:
     enabled: true
   postgresql:
-    host: authentik-rw
+    host: authentik-db-rw
     name: authentik
 
 envFrom:
@@ -12,19 +12,19 @@ envFrom:
 envValueFrom:
   AUTHENTIK_POSTGRESQL__USER:
     secretKeyRef:
-      name: authentik-app
-      key: username
+      name: authentik-secrets
+      key: db_username
   AUTHENTIK_POSTGRESQL__PASSWORD:
     secretKeyRef:
-      name: authentik-app
-      key: password
+      name: authentik-secrets
+      key: db_password
 
 ingress:
   enabled: true
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
   hosts:
-    - host: authentik.linkvt.de
+    - host: authentik.oci.eduard-marbach.de
       paths:
         - path: "/"
           pathType: Prefix
@@ -37,9 +37,16 @@ prometheus:
 
 redis:
   enabled: true
+  image:
+    repository: bitnami/redis
+    tag: 7.2.3-debian-11-r0
   master:
     persistence:
-      enabled: true
-      storageClass: local-path
+      existingClaim: authentik-app-data
+      subPath: redis
   volumePermissions:
     enabled: true
+    image:
+      registry: docker.io
+      repository: bitnami/bitnami-shell
+      tag: 11-debian-11-r136

@@ -5,18 +5,18 @@ alertmanager:
       cert-manager.io/cluster-issuer: letsencrypt
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
-      - alertmanager.linkvt.de
+      - alertmanager.oci.eduard-marbach.de
   config:
     global:
       smtp_auth_password: "{{ smtp.password }}"
       smtp_auth_username: "{{ smtp.username }}"
-      smtp_from: "Alertmanager <alertmanager@linkvt.de>"
+      smtp_from: "Alertmanager <alertmanager-oci@eduard-marbach.de>"
       smtp_smarthost: "{{ smtp.host }}:{{ smtp.port }}"
     receivers:
       - name: "null"
       - name: mail
         email_configs:
-          - to: mail@linkvt.de
+          - to: mail@eduard-marbach.de
             send_resolved: true
     route:
       receiver: "mail"
@@ -52,7 +52,7 @@ grafana:
       cert-manager.io/cluster-issuer: letsencrypt
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
-      - grafana.linkvt.de
+      - grafana.oci.eduard-marbach.de
 
 prometheus:
   ingress:
@@ -61,10 +61,9 @@ prometheus:
       cert-manager.io/cluster-issuer: letsencrypt
       traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
     hosts:
-      - prometheus.linkvt.de
+      - prometheus.oci.eduard-marbach.de
   prometheusSpec:
     ruleSelectorNilUsesHelmValues: false
     serviceMonitorSelectorNilUsesHelmValues: false
     podMonitorSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
-    ruleSelectorNilUsesHelmValues: false

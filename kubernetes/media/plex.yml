@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: calibre
+  name: plex
 spec:
   selector:
     matchLabels:
-      app: calibre
+      app: plex
   template:
     metadata:
       labels:
-        app: calibre
+        app: plex
     spec:
       volumes:
         - name: app-data
@@ -19,64 +19,82 @@ spec:
           persistentVolumeClaim:
             claimName: media-downloads
       containers:
-        - name: calibre
-          image: linuxserver/calibre:v7.4.0-ls262
+        - name: plex
+          image: ghcr.io/linuxserver/plex:1.32.6
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 32400
           envFrom:
             - configMapRef:
                 name: common-deployment-environment
+          env:
+            - name: VERSION
+              value: "docker"
+            - name: PLEX_CLAIM
+              value: "claim-yxkws5MthMw5RrFXoMzN"
           volumeMounts:
             - mountPath: /config
               name: app-data
-              subPath: calibre
-            - mountPath: /books
+              subPath: plex
+            - mountPath: /tv
               name: media
-              subPath: all/books
-
+              subPath: all/test
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: calibre
+  name: plex
 spec:
   ports:
     - port: 80
       name: http
       targetPort: http
   selector:
-    app: calibre
-
+    app: plex
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: calibre
+  name: plex
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: authentik-auth@kubernetescrd
 spec:
   rules:
-    - host: calibre-desktop.oci.eduard-marbach.de
+    - host: plex.oci.eduard-marbach.de
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: calibre
+                name: plex
                 port:
                   name: http
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: calibre-local
-# spec:
-#   storageClassName: local-path
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 1Gi
+  tls:
+    - hosts:
+        - plex.oci.eduard-marbach.de
+      secretName: plex-certificate
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plex-direct
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+    - host: plex-direct.oci.eduard-marbach.de
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: plex
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - plex-direct.oci.eduard-marbach.de
+      secretName: plex-direct-certificate
