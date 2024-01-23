@@ -17,6 +17,7 @@ data:
       log . {
         class error
       }
+
       kubernetes cluster.local in-addr.arpa  ip6.arpa {
         pods insecure
         fallthrough in-addr.arpa ip6.arpa
@@ -33,4 +34,17 @@ data:
       template ANY AAAA {
         rcode NOERROR
       }
+    }
+
+    fritz.box:53 {
+      log . {
+        class error
+      }
+
+      forward . 10.0.0.1
+      cache 60
+      loop
+
+      reload
+      loadbalance
     }
