@@ -150,21 +150,21 @@ sonarr:
           - 026d5aadd1a6b4e550b134cb6c72b3ca # Uncensored
         quality_profiles:
           - name: Remux-1080p - Anime
-            score: 0 # Adjust scoring as desired
+            score: 10 # Adjust scoring as desired
           - name: Default Anime (DE)
-            score: 0
+            score: 10
           - name: Default Anime (DE/EN)
-            score: 0
+            score: 10
 
       - trash_ids:
           - b2550eb333d27b75833e25b8c2557b38 # 10bit
         quality_profiles:
           - name: Remux-1080p - Anime
-            score: 0 # Adjust scoring as desired
+            score: 10 # Adjust scoring as desired
           - name: Default Anime (DE)
-            score: 0
+            score: 10
           - name: Default Anime (DE/EN)
-            score: 0
+            score: 10
 
       - trash_ids:
           - 418f50b10f1907201b6cfdf881f467b7 # Anime Dual Audio
@@ -174,7 +174,7 @@ sonarr:
           - name: Default Anime (DE)
             score: 0
           - name: Default Anime (DE/EN)
-            score: 0
+            score: 101
 
       #### CUSTOM
       - trash_ids:
@@ -182,6 +182,8 @@ sonarr:
         quality_profiles:
           - name: Remux-1080p - Anime
             score: 10
+          - name: Default Anime (DE)
+            score: 100
 
 # Configuration specific to Radarr.
 radarr:
