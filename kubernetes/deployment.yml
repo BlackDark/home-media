@@ -16,6 +16,7 @@ deployments:
   #- path: fluxcd
   #- path: k8up
   - path: media
+  - path: homarr
   #- path: metallb
   #- path: pi-hole
   #- path: smart-home
