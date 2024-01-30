@@ -1,7 +1,7 @@
 helmChart:
   repo: https://metallb.github.io/metallb
   chartName: metallb
-  chartVersion: 0.14.2
+  chartVersion: 0.14.3
   namespace: metallb-system
   releaseName: metallb
   skipPrePull: true
