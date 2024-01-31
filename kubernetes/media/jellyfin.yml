@@ -23,7 +23,7 @@ spec:
             path: /dev/dri
       containers:
         - name: jellyfin
-          image: linuxserver/jellyfin:10.8.13-1-ls242
+          image: linuxserver/jellyfin:10.8.13-1-ls243
           ports:
             - name: http
               containerPort: 8096
