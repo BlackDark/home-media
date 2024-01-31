@@ -23,9 +23,18 @@ resources:
   - jelly-trakt-hook.yml
   #- organizr.yml
   #- freshrss.yml
+  - homepage.yml
 
 configMapGenerator:
   - name: recyclarr
     files:
       - recyclarr/recyclarr.yml
       - recyclarr/settings.yml
+  - name: homepage
+    files:
+      - homepage/bookmarks.yaml
+      - homepage/custom.css
+      - homepage/custom.js
+      - homepage/services.yaml
+      - homepage/settings.yaml
+      - homepage/widgets.yaml

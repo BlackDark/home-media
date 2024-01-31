@@ -1,6 +1,5 @@
 helmChart:
   repo: oci://ghcr.io/oben01/charts/homarr
-  chartName: homarr
   chartVersion: 1.0.4
   namespace: media
   releaseName: homarr

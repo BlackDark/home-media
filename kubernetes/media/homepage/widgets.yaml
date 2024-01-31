@@ -1,0 +1,21 @@
+- logo:
+    icon: mdi-server
+
+- resources:
+    label: System
+    expanded: true
+    cpu: true
+    memory: true
+
+- resources:
+    label: /
+    expanded: true
+    disk: /
+
+- openmeteo:
+    label: Stuttgart # optional
+    latitude: 48.783333
+    longitude: 9.183333
+    timezone: Europe/Berlin # optional
+    units: metric # or imperial
+    cache: 5 # Time in minutes to cache API responses, to stay within limits

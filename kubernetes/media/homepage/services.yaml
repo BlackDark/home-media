@@ -1,0 +1,61 @@
+- arr:
+    - Sonarr:
+        icon: sonarr.png
+        href: https://sonarr.oci.eduard-marbach.de
+        description: Series management
+        siteMonitor: http://sonarr
+        widget:
+            type: sonarr
+            url: http://sonarr
+            key: {{"{{"}}HOMEPAGE_VAR_SONARR_API_KEY{{"}}"}}
+    - Sonarr (Anime):
+        icon: sonarr.png
+        href: https://sonarr-anime.oci.eduard-marbach.de
+        description: Animes management
+        siteMonitor: http://sonarr-anime
+        widget:
+            type: sonarr
+            url: http://sonarr-anime
+            key: {{"{{"}}HOMEPAGE_VAR_SONARR_ANIME_API_KEY{{"}}"}}
+
+    - Radarr:
+        icon: radarr.png
+        href: https://radarr.oci.eduard-marbach.de
+        description: Movie management
+        siteMonitor: http://radarr
+        widget:
+            type: radarr
+            url: http://radarr
+            key: {{"{{"}}HOMEPAGE_VAR_RADARR_API_KEY{{"}}"}}
+
+- Media:
+    - JellySeerr:
+        icon: jellyseerr.png
+        href: https://jellyseerr.oci.eduard-marbach.de/
+        description: Media requesting
+        widget:
+            type: jellyseerr
+            url: http://jellyseerr
+            key: {{"{{"}}HOMEPAGE_VAR_JELLYSEERR_API_KEY{{"}}"}}
+            enableBlocks: true # optional, defaults to false
+            enableNowPlaying: true # optional, defaults to true
+    - Jellyfin:
+        icon: jellyfin.png
+        href: https://jellyfin.oci.eduard-marbach.de/
+        description: Jellyfin Media Server
+        widget:
+            type: jellyfin
+            url: http://jellyfin
+            key: {{"{{"}}HOMEPAGE_VAR_JELLYFIN_API_KEY{{"}}"}}
+            enableBlocks: true # optional, defaults to false
+            enableNowPlaying: true # optional, defaults to true
+
+- Utilities:
+    - SABnzbd:
+        icon: sabnzbd.png
+        href: https://sabnzbd.oci.eduard-marbach.de/
+        description: Usenet downloader
+        widget:
+            type: sabnzbd
+            url: http://sabnzbd
+            key: {{"{{"}}HOMEPAGE_VAR_SABNZBD_API_KEY{{"}}"}}
