@@ -2,4 +2,4 @@ roles:
   - name: geerlingguy.docker
     version: 7.0.2
   - name: artis3n.tailscale
-    version: v4.4.0
+    version: v4.4.1
