@@ -13,7 +13,7 @@
 - name: Start the nordvpn container
   docker_container:
     name: "{{ seedbox_vpn_container_name }}"
-    image: azinchen/nordvpn:3.3.0
+    image: azinchen/nordvpn:3.4.1
     restart_policy: unless-stopped # tmp enable again when it is working with tailscale
     ports:
       - 0.0.0.0:5055:5055 # overseerr
