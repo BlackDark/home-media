@@ -1,7 +1,7 @@
 helmChart:
   repo: https://charts.jetstack.io
   chartName: cert-manager
-  chartVersion: v1.13.3
+  chartVersion: v1.14.1
   namespace: cert-manager
   releaseName: cert-manager
   skipPrePull: true
