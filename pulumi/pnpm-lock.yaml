@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@pulumi/cloudflare':
-    specifier: 5.17.0
-    version: 5.17.0
+    specifier: 5.19.0
+    version: 5.19.0
   '@pulumi/oci':
     specifier: 1.17.0
     version: 1.17.0
@@ -232,8 +232,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/cloudflare@5.17.0:
-    resolution: {integrity: sha512-5Y6N5UBG0BLxxYZAzeVUcpFO98M7W0QJdyE971++cGe9IMIj93Rh0KkA1+cAv1CDEbV3jP42aLrvRczVUnMbew==}
+  /@pulumi/cloudflare@5.19.0:
+    resolution: {integrity: sha512-h8VGDOkuX3ezya5zfngV7ALIicXfUGu8TZndx9hmI5dWza9XiswhAhlx+4K76c73aYjkA0xhAheEsjrCFLe39w==}
     dependencies:
       '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
