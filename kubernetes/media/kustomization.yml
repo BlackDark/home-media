@@ -11,8 +11,14 @@ resources:
   - namespace.yml
   - prowlarr.yml
   - radarr.yml
+  - recyclarr.yml
   - sabnzbd.yml
   - samba.yml
   - secret-media-basic-auth.yml
   - sonarr.yml
   - storage-media.yml
+configMapGenerator:
+  - name: recyclarr
+    files:
+      - recyclarr/recyclarr.yml
+      - recyclarr/settings.yml
