@@ -17,3 +17,39 @@ spec:
       resources:
         requests:
           storage: 1Gi
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-db
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: authentik
+      import:
+        type: monolith
+        databases:
+          - authentik
+        source:
+          externalCluster: authentik-rw
+  monitoring:
+    enablePodMonitor: true
+  storage:
+    pvcTemplate:
+      storageClassName: local-path
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+  externalClusters:
+    - name: authentik-rw
+      connectionParameters:
+        host: authentik-rw
+        user: postgres
+        dbname: authentik
+      password:
+        name: authentik-superuser
+        key: password

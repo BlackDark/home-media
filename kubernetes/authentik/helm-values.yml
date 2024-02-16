@@ -2,7 +2,7 @@ authentik:
   error_reporting:
     enabled: true
   postgresql:
-    host: authentik-rw
+    host: authentik-db-rw
     name: authentik
 
 envFrom:
@@ -12,11 +12,11 @@ envFrom:
 envValueFrom:
   AUTHENTIK_POSTGRESQL__USER:
     secretKeyRef:
-      name: authentik-app
+      name: authentik-db-app
       key: username
   AUTHENTIK_POSTGRESQL__PASSWORD:
     secretKeyRef:
-      name: authentik-app
+      name: authentik-db-app
       key: password
 
 ingress:
