@@ -21,6 +21,14 @@ spec:
       containers:
         - name: sonarr
           image: linuxserver/sonarr:4.0.1.929-ls226
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 8989

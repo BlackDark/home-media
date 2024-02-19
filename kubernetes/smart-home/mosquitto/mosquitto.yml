@@ -33,6 +33,12 @@ spec:
             - "-c"
             - "/app/mosquitto.conf"
           image: eclipse-mosquitto:2.0.18
+          livenessProbe:
+            tcpSocket:
+              port: mqtt
+          readinessProbe:
+            tcpSocket:
+              port: mqtt
           ports:
             - name: http
               containerPort: 9001

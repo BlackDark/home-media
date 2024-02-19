@@ -15,9 +15,17 @@ spec:
       containers:
         - name: home-assistant
           image: ghcr.io/home-assistant/home-assistant:2024.2.2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 8123
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           env:
             - name: TZ
               value: Europe/Berlin

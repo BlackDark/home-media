@@ -18,6 +18,14 @@ spec:
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr:1.13.3.4273-ls53
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 9696

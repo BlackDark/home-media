@@ -14,9 +14,17 @@ spec:
       containers:
         - name: whoami
           image: traefik/whoami
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
 
 ---
 apiVersion: v1
