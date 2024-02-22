@@ -5,35 +5,25 @@ authentik:
     host: authentik-db-rw
     name: authentik
 
-envFrom:
-  - secretRef:
-      name: authentik-config
-
-envValueFrom:
-  AUTHENTIK_POSTGRESQL__USER:
-    secretKeyRef:
-      name: authentik-db-app
-      key: username
-  AUTHENTIK_POSTGRESQL__PASSWORD:
-    secretKeyRef:
-      name: authentik-db-app
-      key: password
-
-ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-  hosts:
-    - host: authentik.linkvt.de
-      paths:
-        - path: "/"
-          pathType: Prefix
+global:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: username
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: password
+  envFrom:
+    - secretRef:
+        name: authentik-config
 
 prometheus:
   rules:
-    create: true
-  serviceMonitor:
-    create: true
+    enabled: true
 
 redis:
   enabled: true
@@ -43,3 +33,17 @@ redis:
       storageClass: local-path
   volumePermissions:
     enabled: true
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - authentik.linkvt.de
+    paths:
+      - "/"
+    pathType: Prefix
+  metrics:
+    serviceMonitor:
+      enabled: true
