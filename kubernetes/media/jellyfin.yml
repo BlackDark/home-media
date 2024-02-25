@@ -25,7 +25,7 @@ spec:
             path: /dev/dri
       containers:
         - name: jellyfin
-          image: linuxserver/jellyfin:10.8.13-1-ls246
+          image: linuxserver/jellyfin:10.8.13-1-ls247
           livenessProbe:
             httpGet:
               path: /
