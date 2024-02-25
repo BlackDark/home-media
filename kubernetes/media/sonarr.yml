@@ -20,7 +20,7 @@ spec:
             claimName: media-downloads
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:4.0.1.929-ls226
+          image: linuxserver/sonarr:4.0.1.929-ls228
           livenessProbe:
             httpGet:
               path: /
