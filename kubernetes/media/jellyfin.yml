@@ -6,6 +6,8 @@ spec:
   selector:
     matchLabels:
       app: jellyfin
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -23,7 +25,15 @@ spec:
             path: /dev/dri
       containers:
         - name: jellyfin
-          image: linuxserver/jellyfin:10.8.13-1-ls246
+          image: linuxserver/jellyfin:10.8.13-1-ls247
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 8096

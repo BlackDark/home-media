@@ -5,35 +5,25 @@ authentik:
     host: authentik-db-rw
     name: authentik
 
-envFrom:
-  - secretRef:
-      name: authentik-config
-
-envValueFrom:
-  AUTHENTIK_POSTGRESQL__USER:
-    secretKeyRef:
-      name: authentik-secrets
-      key: db_username
-  AUTHENTIK_POSTGRESQL__PASSWORD:
-    secretKeyRef:
-      name: authentik-secrets
-      key: db_password
-
-ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-  hosts:
-    - host: authentik.oci.eduard-marbach.de
-      paths:
-        - path: "/"
-          pathType: Prefix
+global:
+  envFrom:
+    - secretRef:
+        name: authentik-config
+  env:
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secrets
+          key: db_username
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secrets
+          key: db_password
 
 prometheus:
   rules:
-    create: true
-  serviceMonitor:
-    create: true
+    enabled: true
 
 redis:
   enabled: true
@@ -50,3 +40,17 @@ redis:
       registry: docker.io
       repository: bitnami/bitnami-shell
       tag: 11-debian-11-r136
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - authentik.oci.eduard-marbach.de
+    paths:
+      - "/"
+    pathType: Prefix
+  metrics:
+    serviceMonitor:
+      enabled: true

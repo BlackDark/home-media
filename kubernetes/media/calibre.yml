@@ -21,6 +21,14 @@ spec:
       containers:
         - name: calibre
           image: linuxserver/calibre:v7.5.1-ls266
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 8080

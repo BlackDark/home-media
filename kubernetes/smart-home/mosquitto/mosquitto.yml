@@ -19,6 +19,7 @@ spec:
             - set -ex;
               cp /config/password_file /mosquitto/config/;
               chown 1883:1883 /mosquitto/config/password_file;
+              chmod 700 /mosquitto/config/password_file;
               mosquitto_passwd -U /mosquitto/config/password_file;
           volumeMounts:
             - mountPath: /mosquitto/config
@@ -33,6 +34,12 @@ spec:
             - "-c"
             - "/app/mosquitto.conf"
           image: eclipse-mosquitto:2.0.18
+          livenessProbe:
+            tcpSocket:
+              port: mqtt
+          readinessProbe:
+            tcpSocket:
+              port: mqtt
           ports:
             - name: http
               containerPort: 9001

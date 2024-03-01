@@ -21,9 +21,17 @@ spec:
       containers:
         - name: node-red
           image: nodered/node-red:3.1.5-16
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - name: http
               containerPort: 1880
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           env:
             - name: TZ
               value: Europe/Berlin
