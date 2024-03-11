@@ -69,6 +69,17 @@ sonarr:
           - name: Default (DE)
           - name: Default (DE/EN)
 
+      - trash_ids:
+          - a3d82cbef5039f8d295478d28a887159 # block HDR10+
+          - 2b239ed870daba8126a53bd5dc8dc1c8 # block DV HDR10+
+        quality_profiles:
+          - name: WEB-1080p
+            score: -10000
+          - name: Default (DE)
+            score: -10000
+          - name: Default (DE/EN)
+            score: -10000
+
       #### WEB-2160p
       # HDR Formats
       - trash_ids:
@@ -145,6 +156,17 @@ sonarr:
       - template: sonarr-v4-quality-profile-anime-home-default
       - template: sonarr-v4-custom-formats-anime-home-default
     custom_formats:
+      - trash_ids:
+          - a3d82cbef5039f8d295478d28a887159 # block HDR10+
+          - 2b239ed870daba8126a53bd5dc8dc1c8 # block DV HDR10+
+        quality_profiles:
+          - name: Remux-1080p - Anime
+            score: -10000
+          - name: Default Anime (DE)
+            score: -10000
+          - name: Default Anime (DE/EN)
+            score: -10000
+
       #### Anime
       - trash_ids:
           - 026d5aadd1a6b4e550b134cb6c72b3ca # Uncensored
@@ -492,3 +514,54 @@ radarr:
         quality_profiles:
           - name: Remux-1080p - Anime
             score: 10
+
+      - trash_ids:
+          - b974a6cd08c1066250f1f177d7aa1225 # block HDR10+
+          - c53085ddbd027d9624b320627748612f # block DV HDR10+
+        quality_profiles:
+          - name: HD Bluray + WEB
+            score: -10000
+          - name: Default (DE)
+            score: -10000
+          - name: Default (DE/EN)
+            score: -10000
+          - name: Remux-1080p - Anime
+            score: -10000
+          - name: Default Anime (DE)
+            score: -10000
+          - name: Default Anime (DE/EN)
+            score: -10000
+
+      - trash_ids:
+          - custom-size-more-40gb # block releases >40GB
+        quality_profiles:
+          - name: Default (DE)
+            score: -10000
+          - name: Default (DE/EN)
+            score: -10000
+          - name: Default Anime (DE)
+            score: -10000
+          - name: Default Anime (DE/EN)
+            score: -10000
+
+    quality_profiles:
+      - name: Default (DE)
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Size: Block More 40GB"
+      - name: Default (DE/EN)
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Size: Block More 40GB"
+      - name: Default Anime (DE)
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Size: Block More 40GB"
+      - name: Default Anime (DE/EN)
+        reset_unmatched_scores:
+          enabled: true
+          except:
+            - "Size: Block More 40GB"
